@@ -457,95 +457,92 @@ export interface Post {
 export interface Partner {
   id: string;
   title: string;
-  partner: {
-    shortName: string;
-    acroynm: string;
-    foundingDate?: string;
-    logo: string | Media;
-    contact: {
-      street1: string;
-      street2?: string;
-      city: string;
-      state:
-        | 'AL'
-        | 'AK'
-        | 'AZ'
-        | 'AR'
-        | 'CA'
-        | 'CO'
-        | 'CT'
-        | 'DE'
-        | 'FL'
-        | 'GA'
-        | 'HI'
-        | 'ID'
-        | 'IL'
-        | 'IN'
-        | 'IA'
-        | 'KS'
-        | 'KY'
-        | 'LA'
-        | 'ME'
-        | 'MD'
-        | 'MA'
-        | 'MI'
-        | 'MN'
-        | 'MS'
-        | 'MO'
-        | 'MT'
-        | 'NE'
-        | 'NV'
-        | 'NH'
-        | 'NJ'
-        | 'NM'
-        | 'NY'
-        | 'NC'
-        | 'ND'
-        | 'OH'
-        | 'OK'
-        | 'OR'
-        | 'PA'
-        | 'RI'
-        | 'SC'
-        | 'SD'
-        | 'TN'
-        | 'TX'
-        | 'UT'
-        | 'VT'
-        | 'VA'
-        | 'WA'
-        | 'WV'
-        | 'WI'
-        | 'WY';
-      zip: string;
-      country?: string;
-    };
-    phone?: string;
-    email?: string;
-    links?: {
-      link: {
-        type?: 'reference' | 'custom';
-        newTab?: boolean;
-        reference: {
-          value: string | Page;
-          relationTo: 'pages';
-        };
-        url: string;
-        label: string;
-      };
-      id?: string;
-    }[];
-    region: 'northeast' | 'midwest' | 'southeast' | 'southcentral' | 'southwest' | 'pacific' | 'mountain';
+  shortName: string;
+  acroynm: string;
+  foundingDate?: string;
+  contact: {
+    street1: string;
+    street2?: string;
+    city: string;
+    state:
+      | 'AL'
+      | 'AK'
+      | 'AZ'
+      | 'AR'
+      | 'CA'
+      | 'CO'
+      | 'CT'
+      | 'DE'
+      | 'FL'
+      | 'GA'
+      | 'HI'
+      | 'ID'
+      | 'IL'
+      | 'IN'
+      | 'IA'
+      | 'KS'
+      | 'KY'
+      | 'LA'
+      | 'ME'
+      | 'MD'
+      | 'MA'
+      | 'MI'
+      | 'MN'
+      | 'MS'
+      | 'MO'
+      | 'MT'
+      | 'NE'
+      | 'NV'
+      | 'NH'
+      | 'NJ'
+      | 'NM'
+      | 'NY'
+      | 'NC'
+      | 'ND'
+      | 'OH'
+      | 'OK'
+      | 'OR'
+      | 'PA'
+      | 'RI'
+      | 'SC'
+      | 'SD'
+      | 'TN'
+      | 'TX'
+      | 'UT'
+      | 'VT'
+      | 'VA'
+      | 'WA'
+      | 'WV'
+      | 'WI'
+      | 'WY';
+    zip: string;
+    country?: string;
   };
+  logo: string | Media;
+  phone?: string;
+  email?: string;
+  links?: {
+    link: {
+      type?: 'reference' | 'custom';
+      newTab?: boolean;
+      reference: {
+        value: string | Page;
+        relationTo: 'pages';
+      };
+      url: string;
+      label: string;
+    };
+    id?: string;
+  }[];
   publishedDate?: string;
   slug?: string;
   updatedAt: string;
   createdAt: string;
-  _status?: 'draft' | 'published';
 }
 export interface CarouselCard {
   id: string;
-  partner: string | Partner;
+  partner?: string | Partner;
+  partnerState?: string;
   title: string;
   subtitle?: string;
   description: {

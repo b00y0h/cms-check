@@ -49,9 +49,4 @@ export const post1: Partial<Post> = {
       ],
     },
   ],
-  meta: {
-    title: 'Post 1',
-    description: 'Post 1',
-    image: '',
-  },
 }

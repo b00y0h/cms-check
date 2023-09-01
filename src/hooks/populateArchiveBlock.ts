@@ -1,6 +1,6 @@
 import type { AfterReadHook } from 'payload/dist/globals/config/types'
 
-import type { Page, Post } from '../payload-types'
+import type { Page } from '../payload-types'
 
 export const populateArchiveBlock: AfterReadHook = async ({ doc, req: { payload } }) => {
   // pre-populate the archive block if `populateBy` is `collection`
@@ -16,36 +16,36 @@ export const populateArchiveBlock: AfterReadHook = async ({ doc, req: { payload 
           }>
         }
 
-        if (archiveBlock.populateBy === 'collection') {
-          const res: { totalDocs: number; docs: Post[] } = await payload.find({
-            collection: archiveBlock.relationTo,
-            limit: archiveBlock.limit || 10,
-            where: {
-              ...(archiveBlock?.categories?.length > 0
-                ? {
-                    categories: {
-                      in: archiveBlock.categories
-                        .map(cat => {
-                          if (typeof cat === 'string') return cat
-                          return cat.id
-                        })
-                        .join(','),
-                    },
-                  }
-                : {}),
-            },
-            sort: '-publishedDate',
-          })
+        // if (archiveBlock.populateBy === 'collection') {
+        //   const res: { totalDocs: number; docs: Post[] } = await payload.find({
+        //     collection: archiveBlock.relationTo,
+        //     limit: archiveBlock.limit || 10,
+        //     where: {
+        //       ...(archiveBlock?.categories?.length > 0
+        //         ? {
+        //             categories: {
+        //               in: archiveBlock.categories
+        //                 .map(cat => {
+        //                   if (typeof cat === 'string') return cat
+        //                   return cat.id
+        //                 })
+        //                 .join(','),
+        //             },
+        //           }
+        //         : {}),
+        //     },
+        //     sort: '-publishedDate',
+        //   })
 
-          return {
-            ...block,
-            populatedDocsTotal: res.totalDocs,
-            populatedDocs: res.docs.map((thisDoc: Post) => ({
-              relationTo: archiveBlock.relationTo,
-              value: thisDoc.id,
-            })),
-          }
-        }
+        //   return {
+        //     ...block,
+        //     populatedDocsTotal: res.totalDocs,
+        //     populatedDocs: res.docs.map((thisDoc: Post) => ({
+        //       relationTo: archiveBlock.relationTo,
+        //       value: thisDoc.id,
+        //     })),
+        //   }
+        // }
       }
 
       return block
