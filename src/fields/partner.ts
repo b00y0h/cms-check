@@ -12,23 +12,19 @@ export const partner: Field = {
       label: 'Short Name',
       required: true,
       admin: {
-        placeholder:
-          'We do not always refer to the full name of the university when talking about it. (i.e. Morgan State, instead of Morgan State University)',
+        placeholder: 'Morgan State, Virginia, etc',
+        description: 'The short name of the university.',
+        width: '50%',
       },
     },
     {
       name: 'acroynm',
       type: 'text',
       label: 'Acroynm',
-      required: true,
       admin: {
-        placeholder: 'The acroynm of the university. (i.e. MSU)',
+        placeholder: 'MSU, UVA, UMBC, etc',
+        width: '50%',
       },
-    },
-    {
-      name: 'foundingDate',
-      type: 'date',
-      label: 'Founding Date',
     },
     address,
     {

@@ -14,6 +14,7 @@ export interface Config {
     media: Media;
     partners: Partner;
     'carousel-cards': CarouselCard;
+    'lead-types': LeadType;
     forms: Form;
     'form-submissions': FormSubmission;
   };
@@ -541,7 +542,9 @@ export interface Partner {
 }
 export interface CarouselCard {
   id: string;
-  partner?: string | Partner;
+  admintitle?: string;
+  partner: string | Partner;
+  leadTypes: string[] | LeadType[];
   partnerState?: string;
   title: string;
   subtitle?: string;
@@ -562,6 +565,12 @@ export interface CarouselCard {
     id?: string;
   }[];
   image: string | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface LeadType {
+  id: string;
+  title: string;
   updatedAt: string;
   createdAt: string;
 }

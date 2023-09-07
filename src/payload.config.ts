@@ -7,6 +7,7 @@ import path from 'path'
 import { buildConfig } from 'payload/config'
 
 import { CarouselCards } from './collections/CarouselCards'
+import { LeadTypes } from './collections/LeadTypes'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
@@ -39,7 +40,7 @@ export default buildConfig({
     }),
   },
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [Users, Pages, Posts, Media, Partners, CarouselCards],
+  collections: [Users, Pages, Posts, Media, Partners, CarouselCards, LeadTypes],
   // globals: [Header, Footer],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

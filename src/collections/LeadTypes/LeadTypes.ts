@@ -2,21 +2,15 @@ import type { CollectionConfig } from 'payload/types'
 
 import { admins } from '../../access/admins'
 import { anyone } from '../../access/anyone'
-import { partner } from '../../fields/partner'
-import { slugField } from '../../fields/slug'
-import { populatePublishedDate } from '../../hooks/populatePublishedDate'
 import { formatAppURL } from '../../hooks/revalidatePage'
 
-export const Partners: CollectionConfig = {
-  slug: 'partners',
+export const LeadTypes: CollectionConfig = {
+  slug: 'lead-types',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'updatedAt'],
+    defaultColumns: ['title'],
     preview: doc =>
       `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({ doc })}`,
-  },
-  hooks: {
-    beforeChange: [populatePublishedDate],
   },
   access: {
     read: anyone,
@@ -28,17 +22,8 @@ export const Partners: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      label: 'Partner Name',
+      label: 'Title',
       required: true,
     },
-    partner,
-    {
-      name: 'publishedDate',
-      type: 'date',
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    slugField(),
   ],
 }

@@ -1,17 +1,24 @@
-import type { AfterChangeHook } from 'payload/dist/collections/config/types'
+import type { BeforeChangeHook } from 'payload/dist/collections/config/types'
+import payload from 'payload'
 
-export const populatePartnerState: AfterChangeHook = ({ doc, req, operation }) => {
-  console.log('🚀 ~ file: populatePartnerState.ts:4 ~ doc, req, operation:', doc)
+export const populatePartnerState: BeforeChangeHook = async ({ data, operation }) => {
   if (operation === 'create' || operation === 'update') {
-    if (req.body) {
-      console.log('🚀🚀🚀🚀🚀 ~ file: populatePartnerState.ts:7 ~ req.body:', req.body)
-      const state = new Date()
+    const partners = await payload.find({
+      collection: 'partners',
+      where: {
+        id: {
+          equals: data.partner,
+        },
+      },
+    })
+
+    if (partners?.docs) {
       return {
-        ...doc,
-        partnerState: state,
+        ...data,
+        partnerState: partners.docs?.[0].contact.state,
       }
     }
   }
 
-  return doc
+  return data
 }
