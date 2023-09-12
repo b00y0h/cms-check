@@ -1,3 +1,4 @@
+import React from 'react'
 import { useTheme } from 'payload/dist/admin/components/utilities/Theme'
 
 import IconDarkSrc from './assets/appily-icon-dark.svg'
