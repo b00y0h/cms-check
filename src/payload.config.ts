@@ -6,6 +6,8 @@ import type { GenerateTitle } from '@payloadcms/plugin-seo/types'
 import path from 'path'
 import { buildConfig } from 'payload/config'
 
+import Icon from './admin/components/Icon'
+import Logo from './admin/components/Logo'
 import { CarouselCards } from './collections/CarouselCards'
 import { LeadTypes } from './collections/LeadTypes'
 import { Media } from './collections/Media'
@@ -22,8 +24,17 @@ const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
 export default buildConfig({
   admin: {
+    meta: {
+      titleSuffix: '- Appily',
+      favicon: '/assets/favicon.svg',
+      ogImage: '/assets/logo.svg',
+    },
     user: Users.slug,
     components: {
+      graphics: {
+        Logo,
+        Icon,
+      },
       // The BeforeDashboard component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import BeforeDashboard statement on line 15.
       // beforeDashboard: [BeforeDashboard],
@@ -57,7 +68,7 @@ export default buildConfig({
   plugins: [
     FormBuilder({
       fields: {
-        payment: true,
+        payment: false,
       },
     }),
     nestedDocs({
