@@ -1,8 +1,8 @@
 import React from 'react'
 import { useTheme } from 'payload/dist/admin/components/utilities/Theme'
 
-import LogoDarkSrc from '../../../assets/appily-logo-dark.svg'
-import LogoLightSrc from '../../../assets/appily-logo-light.svg'
+import LogoDarkSrc from './assets/appily-logo-dark.svg'
+import LogoLightSrc from './assets/appily-logo-light.svg'
 
 interface Props {
   theme: string
