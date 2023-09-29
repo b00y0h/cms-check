@@ -206,5 +206,9 @@ export const state: Field = {
       label: 'Wyoming',
       value: 'WY',
     },
+    {
+      label: 'District of Columbia',
+      value: 'DC',
+    }
   ],
 }
