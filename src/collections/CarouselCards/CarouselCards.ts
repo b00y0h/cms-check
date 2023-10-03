@@ -24,6 +24,9 @@ export const CarouselCards: CollectionConfig = {
     create: admins,
     delete: admins,
   },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'admintitle',

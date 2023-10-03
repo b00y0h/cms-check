@@ -24,6 +24,9 @@ export const Partners: CollectionConfig = {
     create: admins,
     delete: admins,
   },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'title',
