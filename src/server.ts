@@ -9,8 +9,13 @@ import { seed } from './seed'
 
 const app = express()
 
+const allowedOrigins = [
+  process.env.PAYLOAD_PUBLIC_SITE_URL,
+  '*-eab-agency.vercel.app', // Wildcard domain example
+];
+
 var corsOptions = {
-  origin: '*'
+  origin: allowedOrigins
 }
 
 app.use(cors(corsOptions));
