@@ -1,5 +1,6 @@
 import express from 'express'
 import payload from 'payload'
+import cors from 'cors'
 
 // eslint-disable-next-line
 require('dotenv').config()
@@ -7,6 +8,20 @@ require('dotenv').config()
 import { seed } from './seed'
 
 const app = express()
+
+const allowedOriginPattern = /.*-eab-agency\.vercel\.app$/; // Regular expression pattern for matching subdomains
+const allowedURL = process.env.PAYLOAD_PUBLIC_SITE_URL; // Specific URL allowed
+
+const corsOptions: cors.CorsOptions = {
+  origin: [
+      process.env.PAYLOAD_PUBLIC_SITE_URL,
+      "*"
+    ],
+};
+
+app.use(cors(corsOptions));
+
+
 
 // Redirect root to Admin panel
 app.get('/', (_, res) => {
