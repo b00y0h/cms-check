@@ -9,15 +9,9 @@ import { seed } from './seed'
 
 const app = express()
 
-const allowedOriginPattern = /.*-eab-agency\.vercel\.app$/; // Regular expression pattern for matching subdomains
-const allowedURL = process.env.PAYLOAD_PUBLIC_SITE_URL; // Specific URL allowed
-
-const corsOptions: cors.CorsOptions = {
-  origin: [
-      process.env.PAYLOAD_PUBLIC_SITE_URL,
-      "*"
-    ],
-};
+var corsOptions = {
+  origin: '*'
+}
 
 app.use(cors(corsOptions));
 
