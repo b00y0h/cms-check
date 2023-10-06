@@ -16,13 +16,12 @@ const allowedOrigins = [
 
 var corsOptions = {
   origin: (origin, callback) => {
-    console.log("🚀 ~ file: server.ts:19 ~ callback:", callback)
     console.log("🚀 ~ file: server.ts:19 ~ origin:", origin)
-    // if (allowedOrigins.indexOf(origin) !== -1) {
-    //   callback(null, true)
-    // } else {
-    //   callback(new Error())
-    // }
+     if (!origin || allowedOrigins.some(pattern => origin.includes(pattern))) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
   }
 }
 
