@@ -11,11 +11,19 @@ const app = express()
 
 const allowedOrigins = [
   process.env.PAYLOAD_PUBLIC_SITE_URL,
-  '*-eab-agency.vercel.app', // Wildcard domain example
+  '*-eab-agency.vercel.app',
 ];
 
 var corsOptions = {
-  origin: allowedOrigins
+  origin: (origin, callback) => {
+    console.log("🚀 ~ file: server.ts:19 ~ callback:", callback)
+    console.log("🚀 ~ file: server.ts:19 ~ origin:", origin)
+    // if (allowedOrigins.indexOf(origin) !== -1) {
+    //   callback(null, true)
+    // } else {
+    //   callback(new Error())
+    // }
+  }
 }
 
 app.use(cors(corsOptions));

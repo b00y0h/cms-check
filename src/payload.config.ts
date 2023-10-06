@@ -57,13 +57,12 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  // ...(process.env.PAYLOAD_PUBLIC_SITE_URL
-  //   ? {
-  //       cors: [process.env.PAYLOAD_PUBLIC_SITE_URL, '*'].filter(Boolean),
-  //       csrf: [process.env.PAYLOAD_PUBLIC_SITE_URL, '*'].filter(Boolean),
-  //     }
-  //   : {}),
-  cors: ['*'],
+  ...(process.env.PAYLOAD_PUBLIC_SITE_URL
+    ? {
+        cors: [process.env.PAYLOAD_PUBLIC_SITE_URL].filter(Boolean),
+        csrf: [process.env.PAYLOAD_PUBLIC_SITE_URL].filter(Boolean),
+      }
+    : {}),
   plugins: [
     FormBuilder({
       fields: {
