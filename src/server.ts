@@ -11,7 +11,7 @@ const app = express()
 
 const allowedOrigins = [
   process.env.PAYLOAD_PUBLIC_SITE_URL,
-  '*-eab-agency.vercel.app',
+  '-eab-agency.vercel.app',
 ];
 
 var corsOptions = {
