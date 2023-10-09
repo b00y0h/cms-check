@@ -20,7 +20,7 @@ var corsOptions = {
      if (!origin || allowedOrigins.some(pattern => origin.includes(pattern))) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error(`Not allowed by CORS: ${origin}`));
     }
   }
 }
