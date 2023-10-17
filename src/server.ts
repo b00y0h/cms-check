@@ -12,12 +12,12 @@ const app = express()
 const allowedOrigins = [
   process.env.PAYLOAD_PUBLIC_SITE_URL,
   process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  'https://advance.appily.com',
   '-eab-agency.vercel.app',
 ];
 
 var corsOptions = {
   origin: (origin, callback) => {
-    console.log("🚀 ~ file: server.ts:19 ~ origin:", origin)
      if (!origin || allowedOrigins.some(pattern => origin.includes(pattern))) {
       callback(null, true);
     } else {
