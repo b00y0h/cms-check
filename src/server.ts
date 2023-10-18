@@ -14,6 +14,7 @@ const allowedOrigins = [
   process.env.PAYLOAD_PUBLIC_SERVER_URL,
   'http://localhost:3000',
   'https://advance.appily.com',
+  'https://www.advance.appily.com',
   '-eab-agency.vercel.app',
 ];
 
