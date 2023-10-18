@@ -12,6 +12,7 @@ const app = express()
 const allowedOrigins = [
   process.env.PAYLOAD_PUBLIC_SITE_URL,
   process.env.PAYLOAD_PUBLIC_SERVER_URL,
+  'http://localhost:3000',
   'https://advance.appily.com',
   '-eab-agency.vercel.app',
 ];
