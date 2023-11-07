@@ -1,6 +1,6 @@
+import cors from 'cors'
 import express from 'express'
 import payload from 'payload'
-import cors from 'cors'
 
 // eslint-disable-next-line
 require('dotenv').config()
@@ -16,21 +16,20 @@ const allowedOrigins = [
   'https://advance.appily.com',
   'https://www.advance.appily.com',
   '-eab-agency.vercel.app',
-];
+  'amplifyapp.com',
+]
 
 var corsOptions = {
   origin: (origin, callback) => {
-     if (!origin || allowedOrigins.some(pattern => origin.includes(pattern))) {
-      callback(null, true);
+    if (!origin || allowedOrigins.some(pattern => origin.includes(pattern))) {
+      callback(null, true)
     } else {
-      callback(new Error(`Not allowed by CORS: ${origin}`));
+      callback(new Error(`Not allowed by CORS: ${origin}`))
     }
-  }
+  },
 }
 
-app.use(cors(corsOptions));
-
-
+app.use(cors(corsOptions))
 
 // Redirect root to Admin panel
 app.get('/', (_, res) => {
