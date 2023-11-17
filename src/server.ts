@@ -31,9 +31,14 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
+app.use((req, res, next) => {
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  next();
+});
+
 // Redirect root to Admin panel
 app.get('/', (_, res) => {
-  res.redirect('/admin')
+  res.redirect('/admin');
 })
 
 const start = async (): Promise<void> => {
