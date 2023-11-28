@@ -13,6 +13,7 @@ import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
+import NoIndex from './components/custom/Noindex'
 
 const generateTitle: GenerateTitle = () => {
   return 'Appliy CMS'
@@ -36,6 +37,7 @@ export default buildConfig({
       // The BeforeDashboard component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import BeforeDashboard statement on line 15.
       // beforeDashboard: [BeforeDashboard],
+      beforeLogin:[NoIndex]
     },
     webpack: config => ({
       ...config,
