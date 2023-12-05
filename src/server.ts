@@ -15,6 +15,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'https://advance.appily.com',
   'https://www.advance.appily.com',
+  '.advance.appily.com',
   '-eab-agency.vercel.app',
   'amplifyapp.com',
 ]
