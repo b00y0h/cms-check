@@ -15,24 +15,20 @@ export const hero: Field = {
       name: 'type',
       label: 'Type',
       required: true,
-      defaultValue: 'lowImpact',
+      defaultValue: 'landingPage',
       options: [
         {
           label: 'None',
           value: 'none',
         },
         {
-          label: 'High Impact',
-          value: 'highImpact',
+          label: 'Landing Page',
+          value: 'landingPage',
         },
         {
-          label: 'Medium Impact',
-          value: 'mediumImpact',
-        },
-        {
-          label: 'Low Impact',
-          value: 'lowImpact',
-        },
+          label: 'Result Page',
+          value: 'resultPage',
+        }
       ],
     },
     richText({
@@ -47,12 +43,30 @@ export const hero: Field = {
       },
     }),
     {
+      name: 'title',
+      label: 'Pre Title',
+      type: 'text',
+      admin: {
+        condition: (_, { type } = {}) => ['resultPage'].includes(type),
+      },
+    },
+    {
       name: 'media',
       type: 'upload',
       relationTo: 'media',
       required: true,
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) => ['landingPage'].includes(type),
+      },
+    },
+    {
+      name: 'animation',
+      label: 'Lottie Animation JSON',
+      type: 'upload',
+      required: true,
+      relationTo: 'media',
+      admin: {
+        condition: (_, { type } = {}) => ['resultPage'].includes(type),
       },
     },
   ],
