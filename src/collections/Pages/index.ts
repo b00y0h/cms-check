@@ -12,6 +12,8 @@ import { slugField } from '../../fields/slug'
 import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
 import { populatePublishedDate } from '../../hooks/populatePublishedDate'
 import { formatAppURL, revalidatePage } from '../../hooks/revalidatePage'
+import { TwoColumnBlock } from '../../blocks/TwoColumn'
+import { Statistics } from '../../blocks/Statistics'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -62,7 +64,7 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive],
+              blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive, TwoColumnBlock, Statistics],
             },
           ],
         },
