@@ -2,9 +2,7 @@
 
 import type { Block, Field } from 'payload/types'
 
-import link from '../../fields/link'
 import richText from '../../fields/richText'
-import { colorSchema } from '../../fields/colorSchema'
 
 export const statFields: Field[] = [
   {
@@ -24,11 +22,15 @@ export const statFields: Field[] = [
 export const Statistics: Block = {
   slug: 'statistics',
   fields: [
-    colorSchema({}),
     {
       name: 'statistics',
       type:'array',
       fields: statFields
     },
+    {
+      name:'source',
+      type:'text',
+      label: 'Source'
+    }
   ],
 }

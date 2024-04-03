@@ -12,7 +12,7 @@ import { AccordionBlock } from '../../singleBlocks/AccordionBlock'
 import { RichTextBlock } from '../../singleBlocks/RichTextBlock'
 import { MediaBlock } from '../Media'
 import { ButtonGroupBlock } from '../../singleBlocks/ButtonGroupBlock'
-
+import {Statistics} from '../Statistics';
 
 const columnFields: Field[] = [
   {
@@ -43,7 +43,7 @@ const columnFields: Field[] = [
     type: 'blocks',
     label: 'Add Block',
     required: true,
-    blocks: [ SingleStatBlock, TestimonialBlock, CareerBlock, ComparisonBlock, AccordionBlock, RichTextBlock, MediaBlock, ButtonGroupBlock],
+    blocks: [ Statistics, TestimonialBlock, CareerBlock, ComparisonBlock, AccordionBlock, RichTextBlock, MediaBlock, ButtonGroupBlock],
   }
 ]
 
