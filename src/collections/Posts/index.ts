@@ -4,7 +4,7 @@ import { admins } from '../../access/admins'
 import { adminsOrPublished } from '../../access/adminsOrPublished'
 import { Archive } from '../../blocks/Archive'
 import { CallToAction } from '../../blocks/CallToAction'
-import { Content } from '../../blocks/Content'
+import { Section } from '../../blocks/Section'
 import { FormBlock } from '../../blocks/Form'
 import { MediaBlock } from '../../blocks/Media'
 import { hero } from '../../fields/hero'
@@ -62,7 +62,7 @@ export const Posts: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [CallToAction, Content, FormBlock, MediaBlock, Archive],
+              blocks: [CallToAction, Section, FormBlock, MediaBlock, Archive],
             },
           ],
         },

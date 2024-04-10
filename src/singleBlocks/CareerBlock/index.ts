@@ -4,11 +4,12 @@ import type { Block } from 'payload/types'
 import richText from '../../fields/richText'
 import { colorSchema } from '../../fields/colorSchema'
 import linkGroup from '../../fields/linkGroup'
+import { backgroundColor } from '../../fields/backgroundColor'
 
 export const CareerBlock: Block = {
   slug: 'career',
   fields: [
-    colorSchema({}),
+    backgroundColor({ overrides: { name: 'careerBlockBackgroundColor' } }),
     {
     name: 'title',
     label: 'Title',

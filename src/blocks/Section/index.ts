@@ -12,7 +12,6 @@ import { AccordionBlock } from '../../singleBlocks/AccordionBlock'
 import { RichTextBlock } from '../../singleBlocks/RichTextBlock'
 import { MediaBlock } from '../Media'
 import { ButtonGroupBlock } from '../../singleBlocks/ButtonGroupBlock'
-import {Statistics} from '../Statistics';
 
 const columnFields: Field[] = [
   {
@@ -43,14 +42,14 @@ const columnFields: Field[] = [
     type: 'blocks',
     label: 'Add Block',
     required: true,
-    blocks: [ Statistics, TestimonialBlock, CareerBlock, ComparisonBlock, AccordionBlock, RichTextBlock, MediaBlock, ButtonGroupBlock],
+    blocks: [ SingleStatBlock, TestimonialBlock, CareerBlock, ComparisonBlock, AccordionBlock, RichTextBlock, MediaBlock, ButtonGroupBlock],
   }
 ]
 
-export const Content: Block = {
-  slug: 'content',
+export const Section: Block = {
+  slug: 'section',
   fields: [
-    colorSchema({}),
+    backgroundColor({}),
     {
       name: 'enableHighlight', // required
       type: 'checkbox', // required
@@ -59,7 +58,7 @@ export const Content: Block = {
     }, {
       name: 'type',
       type: 'select',
-      label:'Select Row or Column',
+      label:'Layout type',
       defaultValue: 'column',
       options: [
         {

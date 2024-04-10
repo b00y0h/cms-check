@@ -3,6 +3,7 @@
 import type { Block, Field } from 'payload/types'
 
 import richText from '../../fields/richText'
+import { backgroundColor } from '../../fields/backgroundColor'
 
 export const statFields: Field[] = [
   {
@@ -22,10 +23,12 @@ export const statFields: Field[] = [
 export const Statistics: Block = {
   slug: 'statistics',
   fields: [
+    backgroundColor({}),
     {
       name: 'statistics',
       type:'array',
-      fields: statFields
+      fields: statFields,
+      maxRows: 8,
     },
     {
       name:'source',

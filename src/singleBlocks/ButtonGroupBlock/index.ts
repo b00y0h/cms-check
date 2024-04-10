@@ -7,7 +7,7 @@ export const ButtonGroupBlock: Block = {
   slug: 'ButtonGroup',
   fields: [
     linkGroup({
-      appearances: ['primary', 'secondary'],
+      appearances: ['default','primary', 'secondary'],
     })
   ],
 }
