@@ -16,26 +16,36 @@ import { ButtonGroupBlock } from '../../singleBlocks/ButtonGroupBlock'
 const columnFields: Field[] = [
   {
     name: 'size',
+    type: 'text',
+    label: 'Column Size',
+    validate: async (val) => {
+      const regex = /^(\d+(\.\d+)?%?)$/;
+      const checkedVal = regex.test(val)
+      if (!checkedVal) {
+        return "Please enter a valid column size (e.g., 50%, 100, 25.5%)";
+      }
+      return checkedVal; // Return an empty string if validation passes
+    },
+  },
+  {
+    name: 'alignment',
     type: 'select',
-    defaultValue: 'oneThird',
+    label: 'Alignment',
+    defaultValue: 'center',
     options: [
-      {
-        value: 'oneThird',
-        label: 'One Third',
-      },
-      {
-        value: 'half',
-        label: 'Half',
-      },
-      {
-        value: 'twoThirds',
-        label: 'Two Thirds',
-      },
-      {
-        value: 'full',
-        label: 'Full',
-      },
-    ],
+        {
+            label: 'Left',
+            value: 'left'
+        },
+        {
+            label: 'Center',
+            value: 'center'
+        },
+        {
+            label: 'Right',
+            value: 'right'
+        }
+    ]
   },
   {
     name: 'blocks',

@@ -4,7 +4,7 @@ import richText from '../../fields/richText'
 import { backgroundColor } from '../../fields/backgroundColor'
 
 export const CarouselSection: Block = {
-  slug: 'carousel',
+  slug: 'Schoolcarousel',
   fields: [
   backgroundColor({}),
   {
@@ -15,12 +15,12 @@ export const CarouselSection: Block = {
   richText({
     required: false
   }),
-  {
-    name: 'carouselCards',
-    label: 'Carousel Cards',
-    type: 'relationship',
-    relationTo: 'carousel-cards',
-    hasMany: true, // Allow selecting multiple carousel cards
-  },
+  // {
+  //   name: 'carouselCards',
+  //   label: 'Carousel Cards',
+  //   type: 'relationship',
+  //   relationTo: 'carousel-cards',
+  //   hasMany: true, // Allow selecting multiple carousel cards
+  // },
   ],
 }
