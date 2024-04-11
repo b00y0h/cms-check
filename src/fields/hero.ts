@@ -36,6 +36,7 @@ export const hero: Field = {
         elements: ['h1', largeBody, label, 'link'],
         leaves: [],
       },
+      required: false
     }),
     linkGroup({
       overrides: {
