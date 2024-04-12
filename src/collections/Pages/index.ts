@@ -16,6 +16,7 @@ import { Testimonial } from '../../blocks/Testimonial'
 import { CalloutSection } from '../../blocks/CalloutSection'
 import { HighlightCTA } from '../../blocks/HighlightCTASection'
 import { CarouselSection } from '../../blocks/CarouselSection'
+import { Tabsection } from '../../blocks/TabSection'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -66,7 +67,7 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [CallToAction, Section, FormBlock, MediaBlock, Archive, Statistics, Testimonial, CalloutSection, HighlightCTA, CarouselSection],
+              blocks: [CallToAction, Section, FormBlock, MediaBlock, Archive, Statistics, Testimonial, CalloutSection, HighlightCTA, CarouselSection, Tabsection],
               // validate: async (value) => {
               //   const carouselSectionBlocks = value.filter(block => block.blockType === 'CarouselSection');
               //   const isValid = carouselSectionBlocks.length > 1 ;
