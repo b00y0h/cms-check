@@ -1,6 +1,5 @@
 
 import type { Block } from 'payload/types'
-import richText from '../../fields/richText'
 
 export const SingleStatBlock: Block = {
   slug: 'stats',
@@ -16,6 +15,11 @@ export const SingleStatBlock: Block = {
     label: 'Title',
     type: 'text'
   },
-  richText({}),
+  // richText({}),
+  {
+    name: 'richText',
+    label: 'Description',
+    type: 'richText'
+  },
   ],
 }

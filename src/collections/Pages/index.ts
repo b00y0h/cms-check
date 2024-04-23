@@ -23,16 +23,18 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
-    preview: doc =>
-      `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({ doc })}`,
+    livePreview: {
+      url: ({ data }) =>
+        `${process.env.PAYLOAD_PUBLIC_SITE_URL}${data.slug !== 'home' ? `/${data.slug}` : ''}`,
+    },
   },
   hooks: {
     beforeChange: [populatePublishedDate],
-    afterRead: [populateArchiveBlock],
+    // afterRead: [populateArchiveBlock],
     afterChange: [revalidatePage],
   },
-  versions: {
-    drafts: true,
+  versions : {
+    drafts: true
   },
   access: {
     read: adminsOrPublished,

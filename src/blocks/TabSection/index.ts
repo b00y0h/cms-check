@@ -1,7 +1,6 @@
 import type { Block } from 'payload/types'
 import { backgroundColor } from '../../fields/backgroundColor'
 import linkGroup from '../../fields/linkGroup'
-import richText from '../../fields/richText'
 
 export const Tabsection: Block = {
   slug: 'tabsection',
@@ -29,11 +28,13 @@ export const Tabsection: Block = {
           label: 'Content Title',
           type: 'text',
         },
-        richText({
-          name: 'description',
-          label: 'Description',
-          required: false
-        }),
+       
+        {
+            name: 'description',
+            label: 'Description',
+            type: 'richText',
+            required: false
+          },
         linkGroup({
             overrides: {
                 name: 'tabButtongroup'

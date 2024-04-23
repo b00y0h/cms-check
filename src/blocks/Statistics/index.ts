@@ -2,7 +2,6 @@
 
 import type { Block, Field } from 'payload/types'
 
-import richText from '../../fields/richText'
 import { backgroundColor } from '../../fields/backgroundColor'
 
 export const statFields: Field[] = [
@@ -17,7 +16,9 @@ export const statFields: Field[] = [
     label: 'Title',
     type: 'text'
   },
-  richText({}),
+  {name: 'richText',
+  label: 'Description',
+type:'richText'},
 ]
 
 export const Statistics: Block = {

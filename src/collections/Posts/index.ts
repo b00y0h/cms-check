@@ -21,11 +21,11 @@ export const Posts: CollectionConfig = {
     preview: doc =>
       `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/preview?url=${formatAppURL({ doc })}`,
   },
-  hooks: {
-    beforeChange: [populatePublishedDate],
-    afterRead: [populateArchiveBlock],
-    afterChange: [revalidatePage],
-  },
+  // hooks: {
+  //   beforeChange: [populatePublishedDate],
+  //   // afterRead: [populateArchiveBlock],
+  //   afterChange: [revalidatePage],
+  // },
   versions: {
     drafts: true,
   },

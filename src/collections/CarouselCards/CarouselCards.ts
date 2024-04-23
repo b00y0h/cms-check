@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload/types'
-
+import {
+  lexicalEditor
+} from '@payloadcms/richtext-lexical'
 import { admins } from '../../access/admins'
 import { anyone } from '../../access/anyone'
 import linkGroup from '../../fields/linkGroup'
-import richText from '../../fields/richText'
 import { populatePartnerState } from '../../hooks/populatePartnerState'
 import { formatAppURL } from '../../hooks/revalidatePage'
 
@@ -24,9 +25,9 @@ export const CarouselCards: CollectionConfig = {
     create: admins,
     delete: admins,
   },
-  versions: {
-    drafts: true,
-  },
+  // versions: {
+  //   drafts: true,
+  // },
   fields: [
     {
       name: 'admintitle',
@@ -77,12 +78,18 @@ export const CarouselCards: CollectionConfig = {
       type: 'text',
       label: 'Subtitle',
     },
-    richText({
+    // richText({
+    //   name: 'description',
+    //   admin: {
+    //     elements: ['link'],
+    //   },
+    // }),
+    {
       name: 'description',
-      admin: {
-        elements: ['link'],
-      },
-    }),
+      type: 'richText',
+      label: 'Description',
+      editor: lexicalEditor({}),
+    },
     linkGroup({
       appearances: false,
       overrides: {

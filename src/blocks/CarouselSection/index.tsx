@@ -1,6 +1,5 @@
 
 import type { Block } from 'payload/types'
-import richText from '../../fields/richText'
 import { backgroundColor } from '../../fields/backgroundColor'
 
 export const CarouselSection: Block = {
@@ -12,9 +11,12 @@ export const CarouselSection: Block = {
     label: 'Title',
     type: 'text'
   },
-  richText({
+  {
+    name: 'richText',
+    label: 'Description',
+    type: 'richText',
     required: false
-  }),
+  },
   // {
   //   name: 'carouselCards',
   //   label: 'Carousel Cards',

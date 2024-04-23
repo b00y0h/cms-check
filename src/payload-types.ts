@@ -17,1199 +17,1839 @@ export interface Config {
     'lead-types': LeadType;
     forms: Form;
     'form-submissions': FormSubmission;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   globals: {};
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
 export interface User {
   id: string;
-  name?: string;
-  roles?: ('admin' | 'user')[];
+  name?: string | null;
+  roles?: ('admin' | 'user')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
-  resetPasswordToken?: string;
-  resetPasswordExpiration?: string;
-  salt?: string;
-  hash?: string;
-  loginAttempts?: number;
-  lockUntil?: string;
-  password?: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password: string | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
 export interface Page {
   id: string;
   title: string;
-  publishedDate?: string;
+  publishedDate?: string | null;
   hero: {
     type: 'none' | 'landingPage' | 'resultPage';
     richText?: {
-      [k: string]: unknown;
-    }[];
-    links?: {
-      link: {
-        type?: 'reference' | 'custom';
-        newTab?: boolean;
-        reference: {
-          value: string | Page;
-          relationTo: 'pages';
-        };
-        url: string;
-        label: string;
-        appearance?: 'default' | 'primary' | 'secondary';
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
       };
-      id?: string;
-    }[];
-    title?: string;
-    media: string | Media;
-    animation: string | Media;
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: string | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+            appearance?: ('default' | 'primary' | 'secondary') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    title?: string | null;
+    media?: string | Media | null;
+    animation?: string | Media | null;
   };
   layout: (
     | {
         ctaBackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        richText: {
-          [k: string]: unknown;
-        }[];
-        links?: {
-          link: {
-            type?: 'reference' | 'custom';
-            newTab?: boolean;
-            reference: {
-              value: string | Page;
-              relationTo: 'pages';
-            };
-            url: string;
-            label: string;
-            appearance?: 'default' | 'primary' | 'secondary';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
+          [k: string]: unknown;
+        } | null;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'cta';
       }
     | {
         backgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        enableHighlight?: boolean;
-        type?: 'row' | 'column';
-        rows?: {
-          columns?: {
-            size?: string;
-            alignment?: 'left' | 'center' | 'right';
-            blocks: (
-              | {
-                  number: string;
-                  title?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'stats';
-                }
-              | {
-                  author?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  authortitle?: string;
-                  alignment?: 'left' | 'center' | 'right';
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'testimonial';
-                }
-              | {
-                  careerBlockBackgroundColor?:
-                    | 'dark_blue_light_gray'
-                    | 'orange_peach'
-                    | 'turquoise_yellow'
-                    | 'turquoise_light_turquoise'
-                    | 'slate_gray_white';
-                  title?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  image: string | Media;
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        enableHighlight?: boolean | null;
+        type?: ('row' | 'column') | null;
+        rows?:
+          | {
+              columns?:
+                | {
+                    size?: string | null;
+                    alignment?: ('left' | 'center' | 'right') | null;
+                    blocks: (
+                      | {
+                          number: string;
+                          title?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'stats';
+                        }
+                      | {
+                          author?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          authortitle?: string | null;
+                          alignment?: ('left' | 'center' | 'right') | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'testimonial';
+                        }
+                      | {
+                          careerBlockBackgroundColor?:
+                            | (
+                                | 'dark_blue_light_gray'
+                                | 'orange_peach'
+                                | 'turquoise_yellow'
+                                | 'turquoise_light_turquoise'
+                                | 'slate_gray_white'
+                              )
+                            | null;
+                          title?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          image: string | Media;
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'career';
+                        }
+                      | {
+                          title?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          icon: string | Media;
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'comparison';
+                        }
+                      | {
+                          numberedItems?: boolean | null;
+                          accordions?:
+                            | {
+                                title: string;
+                                richText?: {
+                                  root: {
+                                    type: string;
+                                    children: {
+                                      type: string;
+                                      version: number;
+                                      [k: string]: unknown;
+                                    }[];
+                                    direction: ('ltr' | 'rtl') | null;
+                                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                                    indent: number;
+                                    version: number;
+                                  };
+                                  [k: string]: unknown;
+                                } | null;
+                                links?:
+                                  | {
+                                      link: {
+                                        type?: ('reference' | 'custom') | null;
+                                        newTab?: boolean | null;
+                                        reference?: {
+                                          relationTo: 'pages';
+                                          value: string | Page;
+                                        } | null;
+                                        url?: string | null;
+                                        label: string;
+                                        appearance?: ('primary' | 'secondary') | null;
+                                      };
+                                      id?: string | null;
+                                    }[]
+                                  | null;
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'accordion';
+                        }
+                      | {
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'richText';
+                        }
+                      | {
+                          mediaBlockBackgroundColor?:
+                            | (
+                                | 'dark_blue_light_gray'
+                                | 'orange_peach'
+                                | 'turquoise_yellow'
+                                | 'turquoise_light_turquoise'
+                                | 'slate_gray_white'
+                              )
+                            | null;
+                          position?: ('default' | 'fullscreen') | null;
+                          media: string | Media;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'mediaBlock';
+                        }
+                      | {
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('default' | 'primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'ButtonGroup';
+                        }
+                    )[];
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        columns?:
+          | {
+              size?: string | null;
+              alignment?: ('left' | 'center' | 'right') | null;
+              blocks: (
+                | {
+                    number: string;
+                    title?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      url: string;
-                      label: string;
-                      appearance?: 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'career';
-                }
-              | {
-                  title?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  icon: string | Media;
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
-                      };
-                      url: string;
-                      label: string;
-                      appearance?: 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'comparison';
-                }
-              | {
-                  numberedItems?: boolean;
-                  accordions?: {
-                    title: string;
-                    richText: {
                       [k: string]: unknown;
-                    }[];
-                    links?: {
-                      link: {
-                        type?: 'reference' | 'custom';
-                        newTab?: boolean;
-                        reference: {
-                          value: string | Page;
-                          relationTo: 'pages';
-                        };
-                        url: string;
-                        label: string;
-                        appearance?: 'primary' | 'secondary';
+                    } | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'stats';
+                  }
+                | {
+                    author?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      id?: string;
-                    }[];
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'accordion';
-                }
-              | {
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'richText';
-                }
-              | {
-                  mediaBlockBackgroundColor?:
-                    | 'dark_blue_light_gray'
-                    | 'orange_peach'
-                    | 'turquoise_yellow'
-                    | 'turquoise_light_turquoise'
-                    | 'slate_gray_white';
-                  position?: 'default' | 'fullscreen';
-                  media: string | Media;
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'mediaBlock';
-                }
-              | {
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
+                      [k: string]: unknown;
+                    } | null;
+                    authortitle?: string | null;
+                    alignment?: ('left' | 'center' | 'right') | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'testimonial';
+                  }
+                | {
+                    careerBlockBackgroundColor?:
+                      | (
+                          | 'dark_blue_light_gray'
+                          | 'orange_peach'
+                          | 'turquoise_yellow'
+                          | 'turquoise_light_turquoise'
+                          | 'slate_gray_white'
+                        )
+                      | null;
+                    title?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      url: string;
-                      label: string;
-                      appearance?: 'default' | 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'ButtonGroup';
-                }
-            )[];
-            id?: string;
-          }[];
-          id?: string;
-        }[];
-        columns?: {
-          size?: string;
-          alignment?: 'left' | 'center' | 'right';
-          blocks: (
-            | {
-                number: string;
-                title?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'stats';
-              }
-            | {
-                author?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                authortitle?: string;
-                alignment?: 'left' | 'center' | 'right';
-                id?: string;
-                blockName?: string;
-                blockType: 'testimonial';
-              }
-            | {
-                careerBlockBackgroundColor?:
-                  | 'dark_blue_light_gray'
-                  | 'orange_peach'
-                  | 'turquoise_yellow'
-                  | 'turquoise_light_turquoise'
-                  | 'slate_gray_white';
-                title?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                image: string | Media;
-                links?: {
-                  link: {
-                    type?: 'reference' | 'custom';
-                    newTab?: boolean;
-                    reference: {
-                      value: string | Page;
-                      relationTo: 'pages';
-                    };
-                    url: string;
-                    label: string;
-                    appearance?: 'primary' | 'secondary';
-                  };
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'career';
-              }
-            | {
-                title?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                icon: string | Media;
-                links?: {
-                  link: {
-                    type?: 'reference' | 'custom';
-                    newTab?: boolean;
-                    reference: {
-                      value: string | Page;
-                      relationTo: 'pages';
-                    };
-                    url: string;
-                    label: string;
-                    appearance?: 'primary' | 'secondary';
-                  };
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'comparison';
-              }
-            | {
-                numberedItems?: boolean;
-                accordions?: {
-                  title: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
+                      [k: string]: unknown;
+                    } | null;
+                    image: string | Media;
+                    links?:
+                      | {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?: {
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null;
+                            url?: string | null;
+                            label: string;
+                            appearance?: ('primary' | 'secondary') | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'career';
+                  }
+                | {
+                    title?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      url: string;
-                      label: string;
-                      appearance?: 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'accordion';
-              }
-            | {
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'richText';
-              }
-            | {
-                mediaBlockBackgroundColor?:
-                  | 'dark_blue_light_gray'
-                  | 'orange_peach'
-                  | 'turquoise_yellow'
-                  | 'turquoise_light_turquoise'
-                  | 'slate_gray_white';
-                position?: 'default' | 'fullscreen';
-                media: string | Media;
-                id?: string;
-                blockName?: string;
-                blockType: 'mediaBlock';
-              }
-            | {
-                links?: {
-                  link: {
-                    type?: 'reference' | 'custom';
-                    newTab?: boolean;
-                    reference: {
-                      value: string | Page;
-                      relationTo: 'pages';
-                    };
-                    url: string;
-                    label: string;
-                    appearance?: 'default' | 'primary' | 'secondary';
-                  };
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'ButtonGroup';
-              }
-          )[];
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
+                      [k: string]: unknown;
+                    } | null;
+                    icon: string | Media;
+                    links?:
+                      | {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?: {
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null;
+                            url?: string | null;
+                            label: string;
+                            appearance?: ('primary' | 'secondary') | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'comparison';
+                  }
+                | {
+                    numberedItems?: boolean | null;
+                    accordions?:
+                      | {
+                          title: string;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'accordion';
+                  }
+                | {
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'richText';
+                  }
+                | {
+                    mediaBlockBackgroundColor?:
+                      | (
+                          | 'dark_blue_light_gray'
+                          | 'orange_peach'
+                          | 'turquoise_yellow'
+                          | 'turquoise_light_turquoise'
+                          | 'slate_gray_white'
+                        )
+                      | null;
+                    position?: ('default' | 'fullscreen') | null;
+                    media: string | Media;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'mediaBlock';
+                  }
+                | {
+                    links?:
+                      | {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?: {
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null;
+                            url?: string | null;
+                            label: string;
+                            appearance?: ('default' | 'primary' | 'secondary') | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'ButtonGroup';
+                  }
+              )[];
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'section';
       }
     | {
         form: string | Form;
-        enableIntro?: boolean;
-        introContent: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
+        enableIntro?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'formBlock';
       }
     | {
         mediaBlockBackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        position?: 'default' | 'fullscreen';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        position?: ('default' | 'fullscreen') | null;
         media: string | Media;
-        id?: string;
-        blockName?: string;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'mediaBlock';
       }
     | {
-        introContent: {
+        introContent?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
           [k: string]: unknown;
-        }[];
-        populateBy?: 'collection' | 'selection';
-        relationTo?: 'pages';
-        limit?: number;
+        } | null;
+        populateBy?: ('collection' | 'selection') | null;
+        relationTo?: 'pages' | null;
+        limit?: number | null;
         selectedDocs?:
           | {
-              value: string;
               relationTo: 'pages';
+              value: string | Page;
             }[]
-          | {
-              value: Page;
-              relationTo: 'pages';
-            }[];
+          | null;
         populatedDocs?:
           | {
-              value: string;
               relationTo: 'pages';
+              value: string | Page;
             }[]
-          | {
-              value: Page;
-              relationTo: 'pages';
-            }[];
-        populatedDocsTotal?: number;
-        id?: string;
-        blockName?: string;
+          | null;
+        populatedDocsTotal?: number | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'archive';
       }
     | {
         backgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        statistics?: {
-          number: string;
-          title?: string;
-          richText: {
-            [k: string]: unknown;
-          }[];
-          id?: string;
-        }[];
-        source?: string;
-        id?: string;
-        blockName?: string;
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        statistics?:
+          | {
+              number: string;
+              title?: string | null;
+              richText?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+            }[]
+          | null;
+        source?: string | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'statistics';
       }
     | {
-        author?: string;
+        author?: string | null;
         backgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        richText: {
-          [k: string]: unknown;
-        }[];
-        authortitle?: string;
-        links?: {
-          link: {
-            type?: 'reference' | 'custom';
-            newTab?: boolean;
-            reference: {
-              value: string | Page;
-              relationTo: 'pages';
-            };
-            url: string;
-            label: string;
-            appearance?: 'default' | 'primary' | 'secondary';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string;
-        }[];
-        alignment?: 'left' | 'center' | 'right';
-        id?: string;
-        blockName?: string;
+          [k: string]: unknown;
+        } | null;
+        authortitle?: string | null;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        alignment?: ('left' | 'center' | 'right') | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'testimonial';
       }
     | {
         callOutBackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        calloutTitle: {
-          [k: string]: unknown;
-        }[];
-        richText?: {
-          [k: string]: unknown;
-        }[];
-        calloutLinks?: {
-          link: {
-            type?: 'reference' | 'custom';
-            newTab?: boolean;
-            reference: {
-              value: string | Page;
-              relationTo: 'pages';
-            };
-            url: string;
-            label: string;
-            appearance?: 'default' | 'primary' | 'secondary';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        calloutTitle?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
+          [k: string]: unknown;
+        } | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        calloutLinks?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'callout';
       }
     | {
         highlightCTABackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        title?: string;
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        title?: string | null;
         richText?: {
-          [k: string]: unknown;
-        }[];
-        highlightedctaLinks?: {
-          link: {
-            type?: 'reference' | 'custom';
-            newTab?: boolean;
-            reference: {
-              value: string | Page;
-              relationTo: 'pages';
-            };
-            url: string;
-            label: string;
-            appearance?: 'default' | 'primary' | 'secondary';
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string;
-        }[];
-        imagealignment?: 'left' | 'center' | 'right';
-        image?: string | Media;
-        id?: string;
-        blockName?: string;
+          [k: string]: unknown;
+        } | null;
+        highlightedctaLinks?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        imagealignment?: ('left' | 'center' | 'right') | null;
+        image?: string | Media | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'highlightCTA';
       }
     | {
         backgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        title?: string;
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        title?: string | null;
         richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
           [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
+        } | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'Schoolcarousel';
       }
     | {
         tabSectionBackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        tabs?: {
-          tabicon?: string | Media;
-          shortTitle?: string;
-          contentTitle?: string;
-          description?: {
-            [k: string]: unknown;
-          }[];
-          tabButtongroup?: {
-            link: {
-              type?: 'reference' | 'custom';
-              newTab?: boolean;
-              reference: {
-                value: string | Page;
-                relationTo: 'pages';
-              };
-              url: string;
-              label: string;
-              appearance?: 'default' | 'primary' | 'secondary';
-            };
-            id?: string;
-          }[];
-          useSameIcon?: boolean;
-          alternateImage?: string | Media;
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        tabs?:
+          | {
+              tabicon?: string | Media | null;
+              shortTitle?: string | null;
+              contentTitle?: string | null;
+              description?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              tabButtongroup?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?: {
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null;
+                      url?: string | null;
+                      label: string;
+                      appearance?: ('default' | 'primary' | 'secondary') | null;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              useSameIcon?: boolean | null;
+              alternateImage?: string | Media | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'tabsection';
       }
   )[];
-  slug?: string;
-  parent?: string | Page;
-  breadcrumbs?: {
-    doc?: string | Page;
-    url?: string;
-    label?: string;
-    id?: string;
-  }[];
+  slug?: string | null;
+  parent?: (string | null) | Page;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Page;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   meta?: {
-    title?: string;
-    description?: string;
-    image?: string | Media;
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
   };
   updatedAt: string;
   createdAt: string;
-  _status?: 'draft' | 'published';
+  _status?: ('draft' | 'published') | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
 export interface Media {
   id: string;
   alt: string;
   caption?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
     [k: string]: unknown;
-  }[];
+  } | null;
   updatedAt: string;
   createdAt: string;
-  url?: string;
-  filename?: string;
-  mimeType?: string;
-  filesize?: number;
-  width?: number;
-  height?: number;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms".
+ */
 export interface Form {
   id: string;
   title: string;
-  fields?: (
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: string;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'text';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: string;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'textarea';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: string;
-        options?: {
-          label: string;
-          value: string;
-          id?: string;
-        }[];
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'select';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'email';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'state';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'country';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        defaultValue?: number;
-        required?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'number';
-      }
-    | {
-        name: string;
-        label?: string;
-        width?: number;
-        required?: boolean;
-        defaultValue?: boolean;
-        id?: string;
-        blockName?: string;
-        blockType: 'checkbox';
-      }
-    | {
-        message?: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
-        blockType: 'message';
-      }
-  )[];
-  submitButtonLabel?: string;
-  confirmationType?: 'message' | 'redirect';
-  confirmationMessage: {
+  fields?:
+    | (
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            defaultValue?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'checkbox';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'country';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'email';
+          }
+        | {
+            message?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'message';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'number';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            options?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'select';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'state';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'text';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textarea';
+          }
+      )[]
+    | null;
+  submitButtonLabel?: string | null;
+  confirmationType?: ('message' | 'redirect') | null;
+  confirmationMessage?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
     [k: string]: unknown;
-  }[];
+  } | null;
   redirect?: {
     url: string;
   };
-  emails?: {
-    emailTo?: string;
-    cc?: string;
-    bcc?: string;
-    replyTo?: string;
-    emailFrom?: string;
-    subject: string;
-    message?: {
-      [k: string]: unknown;
-    }[];
-    id?: string;
-  }[];
+  emails?:
+    | {
+        emailTo?: string | null;
+        cc?: string | null;
+        bcc?: string | null;
+        replyTo?: string | null;
+        emailFrom?: string | null;
+        subject: string;
+        message?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
 export interface Post {
   id: string;
   title: string;
-  publishedDate?: string;
+  publishedDate?: string | null;
   hero: {
     type: 'none' | 'landingPage' | 'resultPage';
     richText?: {
-      [k: string]: unknown;
-    }[];
-    links?: {
-      link: {
-        type?: 'reference' | 'custom';
-        newTab?: boolean;
-        reference: {
-          value: string | Page;
-          relationTo: 'pages';
-        };
-        url: string;
-        label: string;
-        appearance?: 'default' | 'primary' | 'secondary';
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
       };
-      id?: string;
-    }[];
-    title?: string;
-    media: string | Media;
-    animation: string | Media;
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: string | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+            appearance?: ('default' | 'primary' | 'secondary') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    title?: string | null;
+    media?: string | Media | null;
+    animation?: string | Media | null;
   };
   layout: (
     | {
         ctaBackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        richText: {
-          [k: string]: unknown;
-        }[];
-        links?: {
-          link: {
-            type?: 'reference' | 'custom';
-            newTab?: boolean;
-            reference: {
-              value: string | Page;
-              relationTo: 'pages';
-            };
-            url: string;
-            label: string;
-            appearance?: 'default' | 'primary' | 'secondary';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
+          [k: string]: unknown;
+        } | null;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'cta';
       }
     | {
         backgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        enableHighlight?: boolean;
-        type?: 'row' | 'column';
-        rows?: {
-          columns?: {
-            size?: string;
-            alignment?: 'left' | 'center' | 'right';
-            blocks: (
-              | {
-                  number: string;
-                  title?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'stats';
-                }
-              | {
-                  author?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  authortitle?: string;
-                  alignment?: 'left' | 'center' | 'right';
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'testimonial';
-                }
-              | {
-                  careerBlockBackgroundColor?:
-                    | 'dark_blue_light_gray'
-                    | 'orange_peach'
-                    | 'turquoise_yellow'
-                    | 'turquoise_light_turquoise'
-                    | 'slate_gray_white';
-                  title?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  image: string | Media;
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        enableHighlight?: boolean | null;
+        type?: ('row' | 'column') | null;
+        rows?:
+          | {
+              columns?:
+                | {
+                    size?: string | null;
+                    alignment?: ('left' | 'center' | 'right') | null;
+                    blocks: (
+                      | {
+                          number: string;
+                          title?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'stats';
+                        }
+                      | {
+                          author?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          authortitle?: string | null;
+                          alignment?: ('left' | 'center' | 'right') | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'testimonial';
+                        }
+                      | {
+                          careerBlockBackgroundColor?:
+                            | (
+                                | 'dark_blue_light_gray'
+                                | 'orange_peach'
+                                | 'turquoise_yellow'
+                                | 'turquoise_light_turquoise'
+                                | 'slate_gray_white'
+                              )
+                            | null;
+                          title?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          image: string | Media;
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'career';
+                        }
+                      | {
+                          title?: string | null;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          icon: string | Media;
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'comparison';
+                        }
+                      | {
+                          numberedItems?: boolean | null;
+                          accordions?:
+                            | {
+                                title: string;
+                                richText?: {
+                                  root: {
+                                    type: string;
+                                    children: {
+                                      type: string;
+                                      version: number;
+                                      [k: string]: unknown;
+                                    }[];
+                                    direction: ('ltr' | 'rtl') | null;
+                                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                                    indent: number;
+                                    version: number;
+                                  };
+                                  [k: string]: unknown;
+                                } | null;
+                                links?:
+                                  | {
+                                      link: {
+                                        type?: ('reference' | 'custom') | null;
+                                        newTab?: boolean | null;
+                                        reference?: {
+                                          relationTo: 'pages';
+                                          value: string | Page;
+                                        } | null;
+                                        url?: string | null;
+                                        label: string;
+                                        appearance?: ('primary' | 'secondary') | null;
+                                      };
+                                      id?: string | null;
+                                    }[]
+                                  | null;
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'accordion';
+                        }
+                      | {
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'richText';
+                        }
+                      | {
+                          mediaBlockBackgroundColor?:
+                            | (
+                                | 'dark_blue_light_gray'
+                                | 'orange_peach'
+                                | 'turquoise_yellow'
+                                | 'turquoise_light_turquoise'
+                                | 'slate_gray_white'
+                              )
+                            | null;
+                          position?: ('default' | 'fullscreen') | null;
+                          media: string | Media;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'mediaBlock';
+                        }
+                      | {
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('default' | 'primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                          blockName?: string | null;
+                          blockType: 'ButtonGroup';
+                        }
+                    )[];
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        columns?:
+          | {
+              size?: string | null;
+              alignment?: ('left' | 'center' | 'right') | null;
+              blocks: (
+                | {
+                    number: string;
+                    title?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      url: string;
-                      label: string;
-                      appearance?: 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'career';
-                }
-              | {
-                  title?: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  icon: string | Media;
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
-                      };
-                      url: string;
-                      label: string;
-                      appearance?: 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'comparison';
-                }
-              | {
-                  numberedItems?: boolean;
-                  accordions?: {
-                    title: string;
-                    richText: {
                       [k: string]: unknown;
-                    }[];
-                    links?: {
-                      link: {
-                        type?: 'reference' | 'custom';
-                        newTab?: boolean;
-                        reference: {
-                          value: string | Page;
-                          relationTo: 'pages';
-                        };
-                        url: string;
-                        label: string;
-                        appearance?: 'primary' | 'secondary';
+                    } | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'stats';
+                  }
+                | {
+                    author?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      id?: string;
-                    }[];
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'accordion';
-                }
-              | {
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'richText';
-                }
-              | {
-                  mediaBlockBackgroundColor?:
-                    | 'dark_blue_light_gray'
-                    | 'orange_peach'
-                    | 'turquoise_yellow'
-                    | 'turquoise_light_turquoise'
-                    | 'slate_gray_white';
-                  position?: 'default' | 'fullscreen';
-                  media: string | Media;
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'mediaBlock';
-                }
-              | {
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
+                      [k: string]: unknown;
+                    } | null;
+                    authortitle?: string | null;
+                    alignment?: ('left' | 'center' | 'right') | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'testimonial';
+                  }
+                | {
+                    careerBlockBackgroundColor?:
+                      | (
+                          | 'dark_blue_light_gray'
+                          | 'orange_peach'
+                          | 'turquoise_yellow'
+                          | 'turquoise_light_turquoise'
+                          | 'slate_gray_white'
+                        )
+                      | null;
+                    title?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      url: string;
-                      label: string;
-                      appearance?: 'default' | 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                  blockName?: string;
-                  blockType: 'ButtonGroup';
-                }
-            )[];
-            id?: string;
-          }[];
-          id?: string;
-        }[];
-        columns?: {
-          size?: string;
-          alignment?: 'left' | 'center' | 'right';
-          blocks: (
-            | {
-                number: string;
-                title?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'stats';
-              }
-            | {
-                author?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                authortitle?: string;
-                alignment?: 'left' | 'center' | 'right';
-                id?: string;
-                blockName?: string;
-                blockType: 'testimonial';
-              }
-            | {
-                careerBlockBackgroundColor?:
-                  | 'dark_blue_light_gray'
-                  | 'orange_peach'
-                  | 'turquoise_yellow'
-                  | 'turquoise_light_turquoise'
-                  | 'slate_gray_white';
-                title?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                image: string | Media;
-                links?: {
-                  link: {
-                    type?: 'reference' | 'custom';
-                    newTab?: boolean;
-                    reference: {
-                      value: string | Page;
-                      relationTo: 'pages';
-                    };
-                    url: string;
-                    label: string;
-                    appearance?: 'primary' | 'secondary';
-                  };
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'career';
-              }
-            | {
-                title?: string;
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                icon: string | Media;
-                links?: {
-                  link: {
-                    type?: 'reference' | 'custom';
-                    newTab?: boolean;
-                    reference: {
-                      value: string | Page;
-                      relationTo: 'pages';
-                    };
-                    url: string;
-                    label: string;
-                    appearance?: 'primary' | 'secondary';
-                  };
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'comparison';
-              }
-            | {
-                numberedItems?: boolean;
-                accordions?: {
-                  title: string;
-                  richText: {
-                    [k: string]: unknown;
-                  }[];
-                  links?: {
-                    link: {
-                      type?: 'reference' | 'custom';
-                      newTab?: boolean;
-                      reference: {
-                        value: string | Page;
-                        relationTo: 'pages';
+                      [k: string]: unknown;
+                    } | null;
+                    image: string | Media;
+                    links?:
+                      | {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?: {
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null;
+                            url?: string | null;
+                            label: string;
+                            appearance?: ('primary' | 'secondary') | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'career';
+                  }
+                | {
+                    title?: string | null;
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
                       };
-                      url: string;
-                      label: string;
-                      appearance?: 'primary' | 'secondary';
-                    };
-                    id?: string;
-                  }[];
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'accordion';
-              }
-            | {
-                richText: {
-                  [k: string]: unknown;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'richText';
-              }
-            | {
-                mediaBlockBackgroundColor?:
-                  | 'dark_blue_light_gray'
-                  | 'orange_peach'
-                  | 'turquoise_yellow'
-                  | 'turquoise_light_turquoise'
-                  | 'slate_gray_white';
-                position?: 'default' | 'fullscreen';
-                media: string | Media;
-                id?: string;
-                blockName?: string;
-                blockType: 'mediaBlock';
-              }
-            | {
-                links?: {
-                  link: {
-                    type?: 'reference' | 'custom';
-                    newTab?: boolean;
-                    reference: {
-                      value: string | Page;
-                      relationTo: 'pages';
-                    };
-                    url: string;
-                    label: string;
-                    appearance?: 'default' | 'primary' | 'secondary';
-                  };
-                  id?: string;
-                }[];
-                id?: string;
-                blockName?: string;
-                blockType: 'ButtonGroup';
-              }
-          )[];
-          id?: string;
-        }[];
-        id?: string;
-        blockName?: string;
+                      [k: string]: unknown;
+                    } | null;
+                    icon: string | Media;
+                    links?:
+                      | {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?: {
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null;
+                            url?: string | null;
+                            label: string;
+                            appearance?: ('primary' | 'secondary') | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'comparison';
+                  }
+                | {
+                    numberedItems?: boolean | null;
+                    accordions?:
+                      | {
+                          title: string;
+                          richText?: {
+                            root: {
+                              type: string;
+                              children: {
+                                type: string;
+                                version: number;
+                                [k: string]: unknown;
+                              }[];
+                              direction: ('ltr' | 'rtl') | null;
+                              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                              indent: number;
+                              version: number;
+                            };
+                            [k: string]: unknown;
+                          } | null;
+                          links?:
+                            | {
+                                link: {
+                                  type?: ('reference' | 'custom') | null;
+                                  newTab?: boolean | null;
+                                  reference?: {
+                                    relationTo: 'pages';
+                                    value: string | Page;
+                                  } | null;
+                                  url?: string | null;
+                                  label: string;
+                                  appearance?: ('primary' | 'secondary') | null;
+                                };
+                                id?: string | null;
+                              }[]
+                            | null;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'accordion';
+                  }
+                | {
+                    richText?: {
+                      root: {
+                        type: string;
+                        children: {
+                          type: string;
+                          version: number;
+                          [k: string]: unknown;
+                        }[];
+                        direction: ('ltr' | 'rtl') | null;
+                        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                        indent: number;
+                        version: number;
+                      };
+                      [k: string]: unknown;
+                    } | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'richText';
+                  }
+                | {
+                    mediaBlockBackgroundColor?:
+                      | (
+                          | 'dark_blue_light_gray'
+                          | 'orange_peach'
+                          | 'turquoise_yellow'
+                          | 'turquoise_light_turquoise'
+                          | 'slate_gray_white'
+                        )
+                      | null;
+                    position?: ('default' | 'fullscreen') | null;
+                    media: string | Media;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'mediaBlock';
+                  }
+                | {
+                    links?:
+                      | {
+                          link: {
+                            type?: ('reference' | 'custom') | null;
+                            newTab?: boolean | null;
+                            reference?: {
+                              relationTo: 'pages';
+                              value: string | Page;
+                            } | null;
+                            url?: string | null;
+                            label: string;
+                            appearance?: ('default' | 'primary' | 'secondary') | null;
+                          };
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                    blockName?: string | null;
+                    blockType: 'ButtonGroup';
+                  }
+              )[];
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'section';
       }
     | {
         form: string | Form;
-        enableIntro?: boolean;
-        introContent: {
-          [k: string]: unknown;
-        }[];
-        id?: string;
-        blockName?: string;
+        enableIntro?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'formBlock';
       }
     | {
         mediaBlockBackgroundColor?:
-          | 'dark_blue_light_gray'
-          | 'orange_peach'
-          | 'turquoise_yellow'
-          | 'turquoise_light_turquoise'
-          | 'slate_gray_white';
-        position?: 'default' | 'fullscreen';
+          | (
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        position?: ('default' | 'fullscreen') | null;
         media: string | Media;
-        id?: string;
-        blockName?: string;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'mediaBlock';
       }
     | {
-        introContent: {
+        introContent?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
           [k: string]: unknown;
-        }[];
-        populateBy?: 'collection' | 'selection';
-        relationTo?: 'pages';
-        limit?: number;
+        } | null;
+        populateBy?: ('collection' | 'selection') | null;
+        relationTo?: 'pages' | null;
+        limit?: number | null;
         selectedDocs?:
           | {
-              value: string;
               relationTo: 'pages';
+              value: string | Page;
             }[]
-          | {
-              value: Page;
-              relationTo: 'pages';
-            }[];
+          | null;
         populatedDocs?:
           | {
-              value: string;
               relationTo: 'pages';
+              value: string | Page;
             }[]
-          | {
-              value: Page;
-              relationTo: 'pages';
-            }[];
-        populatedDocsTotal?: number;
-        id?: string;
-        blockName?: string;
+          | null;
+        populatedDocsTotal?: number | null;
+        id?: string | null;
+        blockName?: string | null;
         blockType: 'archive';
       }
   )[];
-  slug?: string;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
-  _status?: 'draft' | 'published';
+  _status?: ('draft' | 'published') | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
 export interface Partner {
   id: string;
   title: string;
   shortName: string;
-  acroynm?: string;
+  acroynm?: string | null;
   contact: {
     street1: string;
-    street2?: string;
+    street2?: string | null;
     city: string;
     state:
       | 'AL'
@@ -1264,73 +1904,127 @@ export interface Partner {
       | 'WY'
       | 'DC';
     zip: string;
-    country?: string;
+    country?: string | null;
   };
   logo: string | Media;
-  phone?: string;
-  email?: string;
-  links?: {
-    link: {
-      type?: 'reference' | 'custom';
-      newTab?: boolean;
-      reference: {
-        value: string | Page;
-        relationTo: 'pages';
-      };
-      url: string;
-      label: string;
-    };
-    id?: string;
-  }[];
-  publishedDate?: string;
-  slug?: string;
+  phone?: string | null;
+  email?: string | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: string | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  publishedDate?: string | null;
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
-  _status?: 'draft' | 'published';
+  _status?: ('draft' | 'published') | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "carousel-cards".
+ */
 export interface CarouselCard {
   id: string;
-  admintitle?: string;
+  admintitle?: string | null;
   partner: string | Partner;
-  leadTypes: string[] | LeadType[];
-  partnerState?: string;
+  leadTypes: (string | LeadType)[];
+  partnerState?: string | null;
   title: string;
-  subtitle?: string;
-  description: {
-    [k: string]: unknown;
-  }[];
-  links?: {
-    link: {
-      type?: 'reference' | 'custom';
-      newTab?: boolean;
-      reference: {
-        value: string | Page;
-        relationTo: 'pages';
-      };
-      url: string;
-      label: string;
-    };
-    id?: string;
-  }[];
+  subtitle?: string | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: string | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
   image: string | Media;
   updatedAt: string;
   createdAt: string;
-  _status?: 'draft' | 'published';
+  _status?: ('draft' | 'published') | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lead-types".
+ */
 export interface LeadType {
   id: string;
   title: string;
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
 export interface FormSubmission {
   id: string;
   form: string | Form;
-  submissionData?: {
-    field: string;
-    value: string;
-    id?: string;
-  }[];
+  submissionData?:
+    | {
+        field: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences".
+ */
+export interface PayloadPreference {
+  id: string;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
+  value?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations".
+ */
+export interface PayloadMigration {
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
+
+declare module 'payload' {
+  export interface GeneratedTypes extends Config {}
 }

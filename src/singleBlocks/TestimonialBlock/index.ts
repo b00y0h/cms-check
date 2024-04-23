@@ -1,9 +1,8 @@
 //stat data number, title, richtext editor 
 
 import type { Block } from 'payload/types'
-import richText from '../../fields/richText'
-import { colorSchema } from '../../fields/colorSchema'
-import linkGroup from '../../fields/linkGroup'
+// import richText from '../../fields/richText'
+
 
 export const TestimonialBlock: Block = {
   slug: 'testimonial',
@@ -13,7 +12,12 @@ export const TestimonialBlock: Block = {
     label: 'Author',
     type: 'text'
   },
-  richText({}),
+  // richText({}),
+  {
+    name: 'richText',
+    label: 'Description',
+    type: 'richText'
+  },
   {
     name: 'authortitle',
     label: 'Author Title',

@@ -1,7 +1,6 @@
 //stat data number, title, richtext editor 
 
 import type { Block } from 'payload/types'
-import richText from '../../fields/richText'
 import { colorSchema } from '../../fields/colorSchema'
 import linkGroup from '../../fields/linkGroup'
 
@@ -13,7 +12,9 @@ export const ComparisonBlock: Block = {
     label: 'Title',
     type: 'text'
   },
-  richText({}),
+  {name: 'richText',
+  label: 'Description',
+type:'richText'},
   {
     name: 'icon',
     type: 'upload',
