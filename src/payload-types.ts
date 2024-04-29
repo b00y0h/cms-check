@@ -90,6 +90,7 @@ export interface Page {
     | {
         ctaBackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -135,6 +136,7 @@ export interface Page {
     | {
         backgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -148,7 +150,7 @@ export interface Page {
           | {
               columns?:
                 | {
-                    size?: string | null;
+                    size: string;
                     alignment?: ('left' | 'center' | 'right') | null;
                     blocks: (
                       | {
@@ -199,6 +201,7 @@ export interface Page {
                       | {
                           careerBlockBackgroundColor?:
                             | (
+                                | 'default'
                                 | 'dark_blue_light_gray'
                                 | 'orange_peach'
                                 | 'turquoise_yellow'
@@ -325,7 +328,7 @@ export interface Page {
                           blockType: 'accordion';
                         }
                       | {
-                          richText?: {
+                          richText: {
                             root: {
                               type: string;
                               children: {
@@ -339,7 +342,7 @@ export interface Page {
                               version: number;
                             };
                             [k: string]: unknown;
-                          } | null;
+                          };
                           id?: string | null;
                           blockName?: string | null;
                           blockType: 'richText';
@@ -347,6 +350,7 @@ export interface Page {
                       | {
                           mediaBlockBackgroundColor?:
                             | (
+                                | 'default'
                                 | 'dark_blue_light_gray'
                                 | 'orange_peach'
                                 | 'turquoise_yellow'
@@ -390,7 +394,7 @@ export interface Page {
           | null;
         columns?:
           | {
-              size?: string | null;
+              size: string;
               alignment?: ('left' | 'center' | 'right') | null;
               blocks: (
                 | {
@@ -441,6 +445,7 @@ export interface Page {
                 | {
                     careerBlockBackgroundColor?:
                       | (
+                          | 'default'
                           | 'dark_blue_light_gray'
                           | 'orange_peach'
                           | 'turquoise_yellow'
@@ -567,7 +572,7 @@ export interface Page {
                     blockType: 'accordion';
                   }
                 | {
-                    richText?: {
+                    richText: {
                       root: {
                         type: string;
                         children: {
@@ -581,7 +586,7 @@ export interface Page {
                         version: number;
                       };
                       [k: string]: unknown;
-                    } | null;
+                    };
                     id?: string | null;
                     blockName?: string | null;
                     blockType: 'richText';
@@ -589,6 +594,7 @@ export interface Page {
                 | {
                     mediaBlockBackgroundColor?:
                       | (
+                          | 'default'
                           | 'dark_blue_light_gray'
                           | 'orange_peach'
                           | 'turquoise_yellow'
@@ -641,6 +647,7 @@ export interface Page {
     | {
         mediaBlockBackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -693,6 +700,7 @@ export interface Page {
     | {
         backgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -731,6 +739,7 @@ export interface Page {
         author?: string | null;
         backgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -778,6 +787,7 @@ export interface Page {
     | {
         callOutBackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -838,6 +848,7 @@ export interface Page {
     | {
         highlightCTABackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -886,6 +897,7 @@ export interface Page {
     | {
         backgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -916,6 +928,7 @@ export interface Page {
     | {
         tabSectionBackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -967,6 +980,28 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'tabsection';
+      }
+    | {
+        innerpageNavBackgroundColor?:
+          | (
+              | 'default'
+              | 'dark_blue_light_gray'
+              | 'orange_peach'
+              | 'turquoise_yellow'
+              | 'turquoise_light_turquoise'
+              | 'slate_gray_white'
+            )
+          | null;
+        innerPageNavigation?:
+          | {
+              title: string;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'innerPageNavigation';
       }
   )[];
   slug?: string | null;
@@ -1232,6 +1267,7 @@ export interface Post {
     | {
         ctaBackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -1277,6 +1313,7 @@ export interface Post {
     | {
         backgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -1290,7 +1327,7 @@ export interface Post {
           | {
               columns?:
                 | {
-                    size?: string | null;
+                    size: string;
                     alignment?: ('left' | 'center' | 'right') | null;
                     blocks: (
                       | {
@@ -1341,6 +1378,7 @@ export interface Post {
                       | {
                           careerBlockBackgroundColor?:
                             | (
+                                | 'default'
                                 | 'dark_blue_light_gray'
                                 | 'orange_peach'
                                 | 'turquoise_yellow'
@@ -1467,7 +1505,7 @@ export interface Post {
                           blockType: 'accordion';
                         }
                       | {
-                          richText?: {
+                          richText: {
                             root: {
                               type: string;
                               children: {
@@ -1481,7 +1519,7 @@ export interface Post {
                               version: number;
                             };
                             [k: string]: unknown;
-                          } | null;
+                          };
                           id?: string | null;
                           blockName?: string | null;
                           blockType: 'richText';
@@ -1489,6 +1527,7 @@ export interface Post {
                       | {
                           mediaBlockBackgroundColor?:
                             | (
+                                | 'default'
                                 | 'dark_blue_light_gray'
                                 | 'orange_peach'
                                 | 'turquoise_yellow'
@@ -1532,7 +1571,7 @@ export interface Post {
           | null;
         columns?:
           | {
-              size?: string | null;
+              size: string;
               alignment?: ('left' | 'center' | 'right') | null;
               blocks: (
                 | {
@@ -1583,6 +1622,7 @@ export interface Post {
                 | {
                     careerBlockBackgroundColor?:
                       | (
+                          | 'default'
                           | 'dark_blue_light_gray'
                           | 'orange_peach'
                           | 'turquoise_yellow'
@@ -1709,7 +1749,7 @@ export interface Post {
                     blockType: 'accordion';
                   }
                 | {
-                    richText?: {
+                    richText: {
                       root: {
                         type: string;
                         children: {
@@ -1723,7 +1763,7 @@ export interface Post {
                         version: number;
                       };
                       [k: string]: unknown;
-                    } | null;
+                    };
                     id?: string | null;
                     blockName?: string | null;
                     blockType: 'richText';
@@ -1731,6 +1771,7 @@ export interface Post {
                 | {
                     mediaBlockBackgroundColor?:
                       | (
+                          | 'default'
                           | 'dark_blue_light_gray'
                           | 'orange_peach'
                           | 'turquoise_yellow'
@@ -1783,6 +1824,7 @@ export interface Post {
     | {
         mediaBlockBackgroundColor?:
           | (
+              | 'default'
               | 'dark_blue_light_gray'
               | 'orange_peach'
               | 'turquoise_yellow'
@@ -1942,6 +1984,21 @@ export interface CarouselCard {
   partnerState?: string | null;
   title: string;
   subtitle?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   links?:
     | {
         link: {
@@ -1960,7 +2017,6 @@ export interface CarouselCard {
   image: string | Media;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

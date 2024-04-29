@@ -1,9 +1,9 @@
 //stat data number, title, richtext editor 
 
 import type { Block } from 'payload/types'
-import { colorSchema } from '../../fields/colorSchema'
 import linkGroup from '../../fields/linkGroup'
 import { backgroundColor } from '../../fields/backgroundColor'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const CareerBlock: Block = {
   slug: 'career',
@@ -17,7 +17,9 @@ export const CareerBlock: Block = {
   {
     name: 'richText',
     label: 'Description',
-    type: 'richText'
+    type: 'richText',
+    // required: true,
+    // editor: lexicalEditor({})
   },
   {
     name: 'image',

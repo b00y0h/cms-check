@@ -17,6 +17,7 @@ import { CalloutSection } from '../../blocks/CalloutSection'
 import { HighlightCTA } from '../../blocks/HighlightCTASection'
 import { CarouselSection } from '../../blocks/CarouselSection'
 import { Tabsection } from '../../blocks/TabSection'
+import { InnerPageNav } from '../../blocks/InnerpageNavSection'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -24,8 +25,12 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data }) =>
-        `${process.env.PAYLOAD_PUBLIC_SITE_URL}${data.slug !== 'home' ? `/${data.slug}` : ''}`,
+      // Define the live preview URL for pages based on their slug
+      url: ({ data }) => {
+        const baseUrl = process.env.PAYLOAD_PUBLIC_SITE_URL || '';
+        const slug = data.slug !== 'home' ? `/${data.slug}` : '';
+        return `${baseUrl}${slug}`;
+      },
     },
   },
   hooks: {
@@ -69,7 +74,7 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [CallToAction, Section, FormBlock, MediaBlock, Archive, Statistics, Testimonial, CalloutSection, HighlightCTA, CarouselSection, Tabsection],
+              blocks: [CallToAction, Section, FormBlock, MediaBlock, Archive, Statistics, Testimonial, CalloutSection, HighlightCTA, CarouselSection, Tabsection, InnerPageNav],
               // validate: async (value) => {
               //   const carouselSectionBlocks = value.filter(block => block.blockType === 'CarouselSection');
               //   const isValid = carouselSectionBlocks.length > 1 ;

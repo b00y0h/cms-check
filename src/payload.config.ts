@@ -17,6 +17,8 @@ import NoIndex from './components/custom/Noindex'
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
+import { Header } from './globals/Header'
+import { Footer } from './globals/Footer'
 
 
 const generateTitle: GenerateTitle = () => {
@@ -28,6 +30,7 @@ const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 export default buildConfig({
   admin: {
     livePreview: {
+      url:process.env.PAYLOAD_PUBLIC_SITE_URL,
       breakpoints: [
         {
           label: 'Mobile',
@@ -69,7 +72,7 @@ export default buildConfig({
   editor: lexicalEditor({}),
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   collections: [Users, Pages, Posts, Media, Partners, CarouselCards, LeadTypes],
-  // globals: [Header, Footer],
+  globals: [Header, Footer],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

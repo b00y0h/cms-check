@@ -17,6 +17,7 @@ const columnFields: Field[] = [
     name: 'size',
     type: 'text',
     label: 'Column Size',
+    required: true,
     validate: async (val) => {
       const regex = /^(\d+(\.\d+)?%?)$/;
       const checkedVal = regex.test(val)
