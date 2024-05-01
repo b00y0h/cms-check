@@ -11,15 +11,27 @@ export const backgroundColor = ({ overrides = {} }: Args): Field =>
     {
       name: 'backgroundColor',
       type: 'select',
-      defaultValue: 'white',
+      defaultValue: 'slate_gray_white',
       options: [
         {
-          label: 'White',
-          value: 'white',
+          label: 'Dark Blue / Light Gray',
+          value: 'dark_blue_light_gray',
         },
         {
-          label: 'Black',
-          value: 'black',
+          label: 'Orange / Peach',
+          value: 'orange_peach',
+        },
+        {
+          label: 'Turquoise / Yellow',
+          value: 'turquoise_yellow',
+        },
+        {
+          label: 'Turquoise / Light Turquoise',
+          value: 'turquoise_light_turquoise',
+        },
+        {
+          label: 'Slate Gray / White',
+          value: 'slate_gray_white',
         },
       ],
     },

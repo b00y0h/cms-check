@@ -14,7 +14,7 @@ export const CallToAction: Block = {
     backgroundColor({ overrides: { name: 'ctaBackgroundColor' } }),
     richText(),
     linkGroup({
-      appearances: ['primary', 'secondary'],
+      appearances: ['default','primary', 'secondary'],
       overrides: {
         maxRows: 2,
       },
