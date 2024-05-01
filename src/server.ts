@@ -5,7 +5,7 @@ import payload from 'payload'
 // eslint-disable-next-line
 require('dotenv').config()
 
-import { seed } from './seed'
+// import { seed } from './seed'
 
 const app = express()
 
@@ -53,11 +53,11 @@ const start = async (): Promise<void> => {
     },
   })
 
-  if (process.env.PAYLOAD_SEED === 'true') {
-    payload.logger.info('Seeding Payload...')
-    await seed(payload)
-    payload.logger.info('Done.')
-  }
+  // if (process.env.PAYLOAD_SEED === 'true') {
+  //   payload.logger.info('Seeding Payload...')
+  //   await seed(payload)
+  //   payload.logger.info('Done.')
+  // }
 
   app.listen(process.env.PORT)
 }
