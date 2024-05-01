@@ -2,7 +2,6 @@ import type { Block, Field } from 'payload/types'
 
 import { backgroundColor } from '../../fields/backgroundColor'
 import link from '../../fields/link'
-import richText from '../../fields/richText'
 import { colorSchema } from '../../fields/colorSchema'
 import { SingleStatBlock } from '../../singleBlocks/StatisticsBlock'
 import { TestimonialBlock } from '../../singleBlocks/TestimonialBlock'
@@ -18,6 +17,7 @@ const columnFields: Field[] = [
     name: 'size',
     type: 'text',
     label: 'Column Size',
+    required: true,
     validate: async (val) => {
       const regex = /^(\d+(\.\d+)?%?)$/;
       const checkedVal = regex.test(val)

@@ -11,8 +11,12 @@ export const backgroundColor = ({ overrides = {} }: Args): Field =>
     {
       name: 'backgroundColor',
       type: 'select',
-      defaultValue: 'slate_gray_white',
+      defaultValue: 'default',
       options: [
+        {
+          label: 'Default',
+          value: 'default',
+        },
         {
           label: 'Dark Blue / Light Gray',
           value: 'dark_blue_light_gray',
@@ -32,7 +36,7 @@ export const backgroundColor = ({ overrides = {} }: Args): Field =>
         {
           label: 'Slate Gray / White',
           value: 'slate_gray_white',
-        },
+        }
       ],
     },
     overrides,

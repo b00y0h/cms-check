@@ -1,6 +1,5 @@
 import type { Block } from 'payload/types'
 
-import richText from '../../fields/richText'
 
 export const FormBlock: Block = {
   slug: 'formBlock',
@@ -23,12 +22,12 @@ export const FormBlock: Block = {
       label: 'Enable Intro Content',
       type: 'checkbox',
     },
-    richText({
-      name: 'introContent',
-      label: 'Intro Content',
-      admin: {
-        condition: (_, { enableIntro }) => Boolean(enableIntro),
-      },
-    }),
+    // richText({
+    //   name: 'introContent',
+    //   label: 'Intro Content',
+    //   admin: {
+    //     condition: (_, { enableIntro }) => Boolean(enableIntro),
+    //   },
+    // }),
   ],
 }

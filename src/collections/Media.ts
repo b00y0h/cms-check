@@ -18,9 +18,6 @@ export const Media: CollectionConfig = {
     {
       name: 'caption',
       type: 'richText',
-      admin: {
-        elements: ['link'],
-      },
     },
   ],
 }

@@ -1,6 +1,5 @@
 
 import type { Block } from 'payload/types'
-import richText from '../../fields/richText'
 import linkGroup from '../../fields/linkGroup'
 import { backgroundColor } from '../../fields/backgroundColor'
 
@@ -13,9 +12,12 @@ export const HighlightCTA: Block = {
     label: 'Title',
     type: 'text'
   },
-  richText({
-    required: false,
-  }),
+  {
+    name: 'richText',
+    label: 'Description',
+    type: 'richText',
+    required: false
+  },
   linkGroup({
     overrides: {
         name: 'highlightedctaLinks'

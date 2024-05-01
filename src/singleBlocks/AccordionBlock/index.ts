@@ -1,6 +1,4 @@
 import type { Block, Field } from 'payload/types'
-import richText from '../../fields/richText'
-import { colorSchema } from '../../fields/colorSchema'
 import linkGroup from '../../fields/linkGroup'
 
 
@@ -11,7 +9,11 @@ const AccordionFields: Field[] = [
     required: true,
     type: 'text'
   },
-  richText({}),
+  {
+    name: 'richText',
+    label: 'Description',
+    type: 'richText'
+  },
   linkGroup({
     appearances: ['primary', 'secondary'],
   })
