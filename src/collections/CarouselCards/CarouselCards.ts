@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload/types'
 import {
-  lexicalEditor
+  SlateToLexicalFeature,
+  lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import { admins } from '../../access/admins'
 import { anyone } from '../../access/anyone'
@@ -25,9 +26,9 @@ export const CarouselCards: CollectionConfig = {
     create: admins,
     delete: admins,
   },
-  // versions: {
-  //   drafts: true,
-  // },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'admintitle',
@@ -88,7 +89,12 @@ export const CarouselCards: CollectionConfig = {
       name: 'description',
       type: 'richText',
       label: 'Description',
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          SlateToLexicalFeature({})
+        ],
+      }),
     },
     linkGroup({
       appearances: false,
