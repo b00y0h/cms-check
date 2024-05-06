@@ -38,7 +38,6 @@ export const backgroundColor = ({ overrides = {} }: Args): Field =>
 					value: "slate_gray_white",
 				},
 			],
-			admin: {},
 		},
 		overrides,
 	);
