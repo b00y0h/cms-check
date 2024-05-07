@@ -20,7 +20,10 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  globals: {};
+  globals: {
+    header: Header;
+    footer: Footer;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -134,6 +137,8 @@ export interface Page {
         blockType: 'cta';
       }
     | {
+        type?: ('row' | 'column') | null;
+        layoutWidth?: ('full' | 'contained' | 'narrow') | null;
         backgroundColor?:
           | (
               | 'default'
@@ -145,7 +150,6 @@ export interface Page {
             )
           | null;
         enableHighlight?: boolean | null;
-        type?: ('row' | 'column') | null;
         rows?:
           | {
               columns?:
@@ -247,6 +251,7 @@ export interface Page {
                           blockType: 'career';
                         }
                       | {
+                          icon: string | Media;
                           title?: string | null;
                           richText?: {
                             root: {
@@ -263,7 +268,6 @@ export interface Page {
                             };
                             [k: string]: unknown;
                           } | null;
-                          icon: string | Media;
                           links?:
                             | {
                                 link: {
@@ -491,6 +495,7 @@ export interface Page {
                     blockType: 'career';
                   }
                 | {
+                    icon: string | Media;
                     title?: string | null;
                     richText?: {
                       root: {
@@ -507,7 +512,6 @@ export interface Page {
                       };
                       [k: string]: unknown;
                     } | null;
-                    icon: string | Media;
                     links?:
                       | {
                           link: {
@@ -736,7 +740,6 @@ export interface Page {
         blockType: 'statistics';
       }
     | {
-        author?: string | null;
         backgroundColor?:
           | (
               | 'default'
@@ -747,6 +750,7 @@ export interface Page {
               | 'slate_gray_white'
             )
           | null;
+        alignment?: ('left' | 'center' | 'right') | null;
         richText?: {
           root: {
             type: string;
@@ -762,6 +766,7 @@ export interface Page {
           };
           [k: string]: unknown;
         } | null;
+        author?: string | null;
         authortitle?: string | null;
         links?:
           | {
@@ -779,7 +784,6 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
-        alignment?: ('left' | 'center' | 'right') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'testimonial';
@@ -1311,6 +1315,8 @@ export interface Post {
         blockType: 'cta';
       }
     | {
+        type?: ('row' | 'column') | null;
+        layoutWidth?: ('full' | 'contained' | 'narrow') | null;
         backgroundColor?:
           | (
               | 'default'
@@ -1322,7 +1328,6 @@ export interface Post {
             )
           | null;
         enableHighlight?: boolean | null;
-        type?: ('row' | 'column') | null;
         rows?:
           | {
               columns?:
@@ -1424,6 +1429,7 @@ export interface Post {
                           blockType: 'career';
                         }
                       | {
+                          icon: string | Media;
                           title?: string | null;
                           richText?: {
                             root: {
@@ -1440,7 +1446,6 @@ export interface Post {
                             };
                             [k: string]: unknown;
                           } | null;
-                          icon: string | Media;
                           links?:
                             | {
                                 link: {
@@ -1668,6 +1673,7 @@ export interface Post {
                     blockType: 'career';
                   }
                 | {
+                    icon: string | Media;
                     title?: string | null;
                     richText?: {
                       root: {
@@ -1684,7 +1690,6 @@ export interface Post {
                       };
                       [k: string]: unknown;
                     } | null;
-                    icon: string | Media;
                     links?:
                       | {
                           link: {
@@ -2017,6 +2022,7 @@ export interface CarouselCard {
   image: string | Media;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2078,6 +2084,54 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  navItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: string | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  navItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: {
+            relationTo: 'pages';
+            value: string | Page;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 
 
