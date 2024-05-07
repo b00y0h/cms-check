@@ -19,6 +19,7 @@ const allowedOrigins = [
   '-eab-agency.vercel.app',
   'amplifyapp.com',
   'https://qa-appily-cms.payloadcms.app',
+  'https://dev.advance.appily.com',
 ]
 
 var corsOptions = {
