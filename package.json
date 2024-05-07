@@ -23,6 +23,7 @@
     "@payloadcms/bundler-webpack": "^1.0.6",
     "@payloadcms/db-mongodb": "^1.5.0",
     "@payloadcms/plugin-cloud": "^2.2.6",
+    "@payloadcms/plugin-cloud-storage": "^1.1.2",
     "@payloadcms/plugin-form-builder": "^1.2.1",
     "@payloadcms/plugin-nested-docs": "^1.0.12",
     "@payloadcms/plugin-redirects": "^1.0.1",

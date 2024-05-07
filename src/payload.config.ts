@@ -14,12 +14,11 @@ import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
 import NoIndex from './components/custom/Noindex'
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { webpackBundler } from "@payloadcms/bundler-webpack";
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
-
 
 const generateTitle: GenerateTitle = () => {
   return 'Appliy CMS'
@@ -30,7 +29,7 @@ const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 export default buildConfig({
   admin: {
     livePreview: {
-      url:process.env.PAYLOAD_PUBLIC_SITE_URL,
+      url: process.env.PAYLOAD_PUBLIC_SITE_URL,
       breakpoints: [
         {
           label: 'Mobile',
@@ -67,7 +66,6 @@ export default buildConfig({
         },
       },
     }),
-    
   },
   editor: lexicalEditor({}),
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
@@ -80,7 +78,7 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   db: mongooseAdapter({
-    url: process.env.MONGODB_URI
+    url: process.env.MONGODB_URI,
   }),
   ...(process.env.PAYLOAD_PUBLIC_SITE_URL
     ? {
