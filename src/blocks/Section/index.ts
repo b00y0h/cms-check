@@ -33,7 +33,7 @@ const columnFields: Field[] = [
 			{
 				name: "alignment",
 				type: "select",
-				label: "Content Alignment",
+				label: "Column Content Alignment",
 				defaultValue: "left",
 				options: [
 					{
@@ -92,11 +92,33 @@ export const Section: Block = {
 							label: "Column",
 						},
 					],
-					admin: {
-						width: "40%",
-					},
 				},
-				backgroundColor({ overrides: { admin: { width: "35%" } } }),
+				{
+					name: "layoutWidth",
+					type: "select",
+					label: "Layout Width",
+					defaultValue: "contained",
+					options: [
+						{
+							value: "full",
+							label: "Full Width",
+						},
+						{
+							value: "contained",
+							label: "Contained",
+						},
+						{
+							value: "narrow",
+							label: "Narrow",
+						},
+					],
+				},
+			],
+		},
+		{
+			type: "row",
+			fields: [
+				backgroundColor({}),
 				{
 					name: "enableHighlight", // required
 					type: "checkbox", // required
@@ -107,7 +129,6 @@ export const Section: Block = {
 							display: "flex",
 							flexDirection: "column-reverse",
 						},
-						width: "25%",
 						description:
 							"Enable this to highlight the section with a decorative shape.",
 					},

@@ -27,7 +27,7 @@ export const statFields: Field[] = [
 export const Statistics: Block = {
 	slug: "statistics",
 	fields: [
-		backgroundColor({}),
+		backgroundColor({ overrides: { admin: { width: "50" } } }),
 		{
 			name: "statistics",
 			type: "array",
