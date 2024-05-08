@@ -5,6 +5,8 @@ import seo from '@payloadcms/plugin-seo'
 import type { GenerateTitle } from '@payloadcms/plugin-seo/types'
 import path from 'path'
 import { buildConfig } from 'payload/config'
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3'
 
 import { CarouselCards } from './collections/CarouselCards'
 import { LeadTypes } from './collections/LeadTypes'
@@ -14,12 +16,11 @@ import { Partners } from './collections/Partners'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
 import NoIndex from './components/custom/Noindex'
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { webpackBundler } from "@payloadcms/bundler-webpack";
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
-
 
 const generateTitle: GenerateTitle = () => {
   return 'Appliy CMS'
@@ -27,10 +28,21 @@ const generateTitle: GenerateTitle = () => {
 
 const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
 
+const storageAdapter = s3Adapter({
+  config: {
+    credentials: {
+      accessKeyId: process.env.S3_ACCESS_KEY_ID,
+      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    },
+    region: process.env.S3_REGION,
+  },
+  bucket: process.env.S3_BUCKET,
+})
+
 export default buildConfig({
   admin: {
     livePreview: {
-      url:process.env.PAYLOAD_PUBLIC_SITE_URL,
+      url: process.env.PAYLOAD_PUBLIC_SITE_URL,
       breakpoints: [
         {
           label: 'Mobile',
@@ -67,7 +79,6 @@ export default buildConfig({
         },
       },
     }),
-    
   },
   editor: lexicalEditor({}),
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
@@ -80,7 +91,7 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   db: mongooseAdapter({
-    url: process.env.MONGODB_URI
+    url: process.env.MONGODB_URI,
   }),
   ...(process.env.PAYLOAD_PUBLIC_SITE_URL
     ? {
@@ -89,6 +100,13 @@ export default buildConfig({
       }
     : {}),
   plugins: [
+    cloudStorage({
+      collections: {
+        media: {
+          adapter: storageAdapter,
+        },
+      },
+    }),
     FormBuilder({
       fields: {
         payment: false,
@@ -99,9 +117,6 @@ export default buildConfig({
       generateLabel: (_, doc) => doc.title as string,
       generateURL: docs => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
     }),
-    // redirects({
-    //   collections: ['pages'],
-    // }),
     seo({
       collections: ['pages'],
       generateTitle,
