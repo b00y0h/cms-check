@@ -899,7 +899,7 @@ export interface Page {
         blockType: 'highlightCTA';
       }
     | {
-        backgroundColor?:
+        carouselBackgroundColor?:
           | (
               | 'default'
               | 'dark_blue_light_gray'
@@ -1057,6 +1057,24 @@ export interface Media {
   filesize?: number | null;
   width?: number | null;
   height?: number | null;
+  sizes?: {
+    squareSmall?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    squareMedium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
