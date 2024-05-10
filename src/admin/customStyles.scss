@@ -1,0 +1,9 @@
+// Add the following code to the file to change the font weight of the headings in the Rich Text Editor.
+.rich-text-lexical .editor-shell h1,
+.rich-text-lexical .editor-shell h2,
+.rich-text-lexical .editor-shell h3,
+.rich-text-lexical .editor-shell h4,
+.rich-text-lexical .editor-shell h5,
+.rich-text-lexical .editor-shell h6 {
+  font-weight: normal !important;
+}
