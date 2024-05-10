@@ -20,7 +20,7 @@ export const ComparisonBlock: Block = {
 		},
 		{ name: "richText", label: "Description", type: "richText" },
 		linkGroup({
-			appearances: ["primary", "secondary"],
+			appearances: ["primary", "secondary", "tertiary", "default"],
 		}),
 	],
 };

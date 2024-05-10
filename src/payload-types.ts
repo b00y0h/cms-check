@@ -279,7 +279,7 @@ export interface Page {
                                   } | null;
                                   url?: string | null;
                                   label: string;
-                                  appearance?: ('primary' | 'secondary') | null;
+                                  appearance?: ('primary' | 'secondary' | 'tertiary' | 'default') | null;
                                 };
                                 id?: string | null;
                               }[]
@@ -352,17 +352,10 @@ export interface Page {
                           blockType: 'richText';
                         }
                       | {
-                          mediaBlockBackgroundColor?:
-                            | (
-                                | 'default'
-                                | 'dark_blue_light_gray'
-                                | 'orange_peach'
-                                | 'turquoise_yellow'
-                                | 'turquoise_light_turquoise'
-                                | 'slate_gray_white'
-                              )
+                          cornerStyle?:
+                            | ('square' | 'slightly-rounded' | 'moderately-rounded' | 'very-rounded' | 'circular')
                             | null;
-                          position?: ('default' | 'fullscreen') | null;
+                          enableHighlight?: boolean | null;
                           media: string | Media;
                           id?: string | null;
                           blockName?: string | null;
@@ -380,7 +373,7 @@ export interface Page {
                                   } | null;
                                   url?: string | null;
                                   label: string;
-                                  appearance?: ('default' | 'primary' | 'secondary') | null;
+                                  appearance?: ('default' | 'primary' | 'secondary' | 'tertiary') | null;
                                 };
                                 id?: string | null;
                               }[]
@@ -523,7 +516,7 @@ export interface Page {
                             } | null;
                             url?: string | null;
                             label: string;
-                            appearance?: ('primary' | 'secondary') | null;
+                            appearance?: ('primary' | 'secondary' | 'tertiary' | 'default') | null;
                           };
                           id?: string | null;
                         }[]
@@ -596,17 +589,10 @@ export interface Page {
                     blockType: 'richText';
                   }
                 | {
-                    mediaBlockBackgroundColor?:
-                      | (
-                          | 'default'
-                          | 'dark_blue_light_gray'
-                          | 'orange_peach'
-                          | 'turquoise_yellow'
-                          | 'turquoise_light_turquoise'
-                          | 'slate_gray_white'
-                        )
+                    cornerStyle?:
+                      | ('square' | 'slightly-rounded' | 'moderately-rounded' | 'very-rounded' | 'circular')
                       | null;
-                    position?: ('default' | 'fullscreen') | null;
+                    enableHighlight?: boolean | null;
                     media: string | Media;
                     id?: string | null;
                     blockName?: string | null;
@@ -624,7 +610,7 @@ export interface Page {
                             } | null;
                             url?: string | null;
                             label: string;
-                            appearance?: ('default' | 'primary' | 'secondary') | null;
+                            appearance?: ('default' | 'primary' | 'secondary' | 'tertiary') | null;
                           };
                           id?: string | null;
                         }[]
@@ -649,17 +635,8 @@ export interface Page {
         blockType: 'formBlock';
       }
     | {
-        mediaBlockBackgroundColor?:
-          | (
-              | 'default'
-              | 'dark_blue_light_gray'
-              | 'orange_peach'
-              | 'turquoise_yellow'
-              | 'turquoise_light_turquoise'
-              | 'slate_gray_white'
-            )
-          | null;
-        position?: ('default' | 'fullscreen') | null;
+        cornerStyle?: ('square' | 'slightly-rounded' | 'moderately-rounded' | 'very-rounded' | 'circular') | null;
+        enableHighlight?: boolean | null;
         media: string | Media;
         id?: string | null;
         blockName?: string | null;
@@ -1476,7 +1453,7 @@ export interface Post {
                                   } | null;
                                   url?: string | null;
                                   label: string;
-                                  appearance?: ('primary' | 'secondary') | null;
+                                  appearance?: ('primary' | 'secondary' | 'tertiary' | 'default') | null;
                                 };
                                 id?: string | null;
                               }[]
@@ -1549,17 +1526,10 @@ export interface Post {
                           blockType: 'richText';
                         }
                       | {
-                          mediaBlockBackgroundColor?:
-                            | (
-                                | 'default'
-                                | 'dark_blue_light_gray'
-                                | 'orange_peach'
-                                | 'turquoise_yellow'
-                                | 'turquoise_light_turquoise'
-                                | 'slate_gray_white'
-                              )
+                          cornerStyle?:
+                            | ('square' | 'slightly-rounded' | 'moderately-rounded' | 'very-rounded' | 'circular')
                             | null;
-                          position?: ('default' | 'fullscreen') | null;
+                          enableHighlight?: boolean | null;
                           media: string | Media;
                           id?: string | null;
                           blockName?: string | null;
@@ -1577,7 +1547,7 @@ export interface Post {
                                   } | null;
                                   url?: string | null;
                                   label: string;
-                                  appearance?: ('default' | 'primary' | 'secondary') | null;
+                                  appearance?: ('default' | 'primary' | 'secondary' | 'tertiary') | null;
                                 };
                                 id?: string | null;
                               }[]
@@ -1720,7 +1690,7 @@ export interface Post {
                             } | null;
                             url?: string | null;
                             label: string;
-                            appearance?: ('primary' | 'secondary') | null;
+                            appearance?: ('primary' | 'secondary' | 'tertiary' | 'default') | null;
                           };
                           id?: string | null;
                         }[]
@@ -1793,17 +1763,10 @@ export interface Post {
                     blockType: 'richText';
                   }
                 | {
-                    mediaBlockBackgroundColor?:
-                      | (
-                          | 'default'
-                          | 'dark_blue_light_gray'
-                          | 'orange_peach'
-                          | 'turquoise_yellow'
-                          | 'turquoise_light_turquoise'
-                          | 'slate_gray_white'
-                        )
+                    cornerStyle?:
+                      | ('square' | 'slightly-rounded' | 'moderately-rounded' | 'very-rounded' | 'circular')
                       | null;
-                    position?: ('default' | 'fullscreen') | null;
+                    enableHighlight?: boolean | null;
                     media: string | Media;
                     id?: string | null;
                     blockName?: string | null;
@@ -1821,7 +1784,7 @@ export interface Post {
                             } | null;
                             url?: string | null;
                             label: string;
-                            appearance?: ('default' | 'primary' | 'secondary') | null;
+                            appearance?: ('default' | 'primary' | 'secondary' | 'tertiary') | null;
                           };
                           id?: string | null;
                         }[]
@@ -1846,17 +1809,8 @@ export interface Post {
         blockType: 'formBlock';
       }
     | {
-        mediaBlockBackgroundColor?:
-          | (
-              | 'default'
-              | 'dark_blue_light_gray'
-              | 'orange_peach'
-              | 'turquoise_yellow'
-              | 'turquoise_light_turquoise'
-              | 'slate_gray_white'
-            )
-          | null;
-        position?: ('default' | 'fullscreen') | null;
+        cornerStyle?: ('square' | 'slightly-rounded' | 'moderately-rounded' | 'very-rounded' | 'circular') | null;
+        enableHighlight?: boolean | null;
         media: string | Media;
         id?: string | null;
         blockName?: string | null;

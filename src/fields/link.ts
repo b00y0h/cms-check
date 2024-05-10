@@ -11,13 +11,17 @@ export const appearanceOptions = {
 		label: "Secondary Button",
 		value: "secondary",
 	},
+	tertiary: {
+		label: "Tertiary Button",
+		value: "tertiary",
+	},
 	default: {
 		label: "Default",
 		value: "default",
 	},
 };
 
-export type LinkAppearances = "primary" | "secondary" | "default";
+export type LinkAppearances = "primary" | "secondary" | "tertiary" | "default";
 
 type LinkType = (options?: {
 	appearances?: LinkAppearances[] | false;
