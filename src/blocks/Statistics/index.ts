@@ -27,7 +27,32 @@ export const statFields: Field[] = [
 export const Statistics: Block = {
 	slug: "statistics",
 	fields: [
-		backgroundColor({ overrides: { admin: { width: "50" } } }),
+		{
+			type: "row",
+			fields: [
+				backgroundColor({ overrides: { admin: { width: "50" } } }),
+				{
+					name: "layoutWidth",
+					type: "select",
+					label: "Layout Width",
+					defaultValue: "contained",
+					options: [
+						{
+							value: "full",
+							label: "Full Width",
+						},
+						{
+							value: "contained",
+							label: "Contained",
+						},
+						{
+							value: "narrow",
+							label: "Narrow",
+						},
+					],
+				},
+			],
+		},
 		{
 			name: "statistics",
 			type: "array",
