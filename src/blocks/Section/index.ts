@@ -99,11 +99,11 @@ export const Section: Block = {
 					options: [
 						{
 							value: "row",
-							label: "Row",
+							label: "Rows",
 						},
 						{
 							value: "column",
-							label: "Column",
+							label: "Columns",
 						},
 					],
 				},
