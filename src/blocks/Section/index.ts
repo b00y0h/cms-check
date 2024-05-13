@@ -33,7 +33,7 @@ const columnFields: Field[] = [
 			{
 				name: "alignment",
 				type: "select",
-				label: "Column Content Alignment",
+				label: "Blocks Alignment",
 				defaultValue: "left",
 				options: [
 					{
@@ -49,6 +49,20 @@ const columnFields: Field[] = [
 						value: "right",
 					},
 				],
+			},
+			{
+				name: "extendToBorders",
+				type: "checkbox",
+				label: "Extend to borders",
+				defaultValue: false,
+				admin: {
+					description:
+						"Enable this to extend the column to the borders of the section.",
+					style: {
+						display: "flex ",
+						flexDirection: "column-reverse",
+					},
+				},
 			},
 		],
 	},

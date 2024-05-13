@@ -156,6 +156,7 @@ export interface Page {
                 | {
                     size: string;
                     alignment?: ('left' | 'center' | 'right') | null;
+                    extendToBorders?: boolean | null;
                     blocks: (
                       | {
                           number: string;
@@ -393,6 +394,7 @@ export interface Page {
           | {
               size: string;
               alignment?: ('left' | 'center' | 'right') | null;
+              extendToBorders?: boolean | null;
               blocks: (
                 | {
                     number: string;
@@ -1330,6 +1332,7 @@ export interface Post {
                 | {
                     size: string;
                     alignment?: ('left' | 'center' | 'right') | null;
+                    extendToBorders?: boolean | null;
                     blocks: (
                       | {
                           number: string;
@@ -1567,6 +1570,7 @@ export interface Post {
           | {
               size: string;
               alignment?: ('left' | 'center' | 'right') | null;
+              extendToBorders?: boolean | null;
               blocks: (
                 | {
                     number: string;
