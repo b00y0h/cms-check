@@ -5,7 +5,8 @@ import seo from "@payloadcms/plugin-seo";
 import type { GenerateTitle } from "@payloadcms/plugin-seo/types";
 import path from "path";
 import { buildConfig } from "payload/config";
-
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3'
 import { CarouselCards } from "./collections/CarouselCards";
 import { LeadTypes } from "./collections/LeadTypes";
 import { Media } from "./collections/Media";
@@ -25,6 +26,18 @@ const generateTitle: GenerateTitle = () => {
 };
 
 const mockModulePath = path.resolve(__dirname, "./emptyModuleMock.js");
+
+
+const storageAdapter = s3Adapter({
+	config: {
+	  credentials: {
+		accessKeyId: process.env.S3_ACCESS_KEY_ID,
+		secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+	  },
+	  region: process.env.S3_REGION,
+	},
+	bucket: process.env.S3_BUCKET,
+  })
 
 export default buildConfig({
 	admin: {
@@ -88,6 +101,13 @@ export default buildConfig({
 		  }
 		: {}),
 	plugins: [
+		cloudStorage({
+			collections: {
+			  media: {
+				adapter: storageAdapter,
+			  },
+			},
+		  }),
 		FormBuilder({
 			fields: {
 				payment: false,

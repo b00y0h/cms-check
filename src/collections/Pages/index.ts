@@ -26,9 +26,16 @@ export const Pages: CollectionConfig = {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       // Define the live preview URL for pages based on their slug
-      url: ({ data }) => {
+      url: ({         data
+ }) => {
         const baseUrl = process.env.PAYLOAD_PUBLIC_SITE_URL || '';
-        const slug = data.slug !== 'home' ? `/${data.slug}` : '';
+        let slug ='';       
+        if (data?.breadcrumbs) {
+          const { url: lastCrumbURL = '' } = data?.breadcrumbs?.[data?.breadcrumbs.length - 1] || {} // last crumb
+          slug = lastCrumbURL
+        } else {
+          slug = data?.slug
+        }
         return `${baseUrl}${slug}`;
       },
     },

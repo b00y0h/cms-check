@@ -14,6 +14,12 @@ export const ComparisonBlock: Block = {
 			required: true,
 		},
 		{
+			name: "darkicon",
+			label:'Dark Icon',
+			type: "upload",
+			relationTo: "media",
+		},
+		{
 			name: "title",
 			label: "Title",
 			type: "text",
