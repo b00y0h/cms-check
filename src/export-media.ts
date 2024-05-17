@@ -10,14 +10,13 @@ dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
 
-const { PAYLOAD_SECRET, MONGODB_URI } = process.env
+const { PAYLOAD_SECRET } = process.env
 
 const BATCH_SIZE = 20
 
 const exportMedia = async (): Promise<void> => {
   await payload.init({
     secret: PAYLOAD_SECRET,
-    mongoURL: MONGODB_URI,
     local: true, // Enables local mode, doesn't spin up a server or frontend
   })
 
