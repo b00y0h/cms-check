@@ -1,35 +1,35 @@
 import type { CollectionConfig } from 'payload/types'
+
 import { admins } from '../../access/admins'
 import { adminsOrPublished } from '../../access/adminsOrPublished'
 import { Archive } from '../../blocks/Archive'
+import { CalloutSection } from '../../blocks/CalloutSection'
 import { CallToAction } from '../../blocks/CallToAction'
-import { Section } from '../../blocks/Section'
+import { CarouselSection } from '../../blocks/CarouselSection'
 import { FormBlock } from '../../blocks/Form'
+import { HighlightCTA } from '../../blocks/HighlightCTASection'
+import { InnerPageNav } from '../../blocks/InnerpageNavSection'
 import { MediaBlock } from '../../blocks/Media'
+import { Section } from '../../blocks/Section'
+import { Statistics } from '../../blocks/Statistics'
+import { Tabsection } from '../../blocks/TabSection'
+import { Testimonial } from '../../blocks/Testimonial'
 import { hero } from '../../fields/hero'
 import { slugField } from '../../fields/slug'
-import { populateArchiveBlock } from '../../hooks/populateArchiveBlock'
 import { populatePublishedDate } from '../../hooks/populatePublishedDate'
-import { formatAppURL, revalidatePage } from '../../hooks/revalidatePage'
-import { Statistics } from '../../blocks/Statistics'
-import { Testimonial } from '../../blocks/Testimonial'
-import { CalloutSection } from '../../blocks/CalloutSection'
-import { HighlightCTA } from '../../blocks/HighlightCTASection'
-import { CarouselSection } from '../../blocks/CarouselSection'
-import { Tabsection } from '../../blocks/TabSection'
-import { InnerPageNav } from '../../blocks/InnerpageNavSection'
+import { revalidatePage } from '../../hooks/revalidatePage'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'fullPath', 'updatedAt'],
     livePreview: {
       // Define the live preview URL for pages based on their slug
       url: ({ data }) => {
-        const baseUrl = process.env.PAYLOAD_PUBLIC_SITE_URL || '';
-        const slug = data.slug !== 'home' ? `/${data.slug}` : '';
-        return `${baseUrl}${slug}`;
+        const baseUrl = process.env.PAYLOAD_PUBLIC_SITE_URL || ''
+        const slug = data.slug !== 'home' ? `/${data.slug}` : ''
+        return `${baseUrl}${slug}`
       },
     },
   },
@@ -38,8 +38,8 @@ export const Pages: CollectionConfig = {
     // afterRead: [populateArchiveBlock],
     afterChange: [revalidatePage],
   },
-  versions : {
-    drafts: true
+  versions: {
+    drafts: true,
   },
   access: {
     read: adminsOrPublished,
@@ -48,6 +48,26 @@ export const Pages: CollectionConfig = {
     delete: admins,
   },
   fields: [
+    {
+      name: 'fullPath',
+      type: 'text',
+      admin: {
+        hidden: true,
+      },
+      hooks: {
+        beforeChange: [
+          ({ siblingData }) => {
+            // Mutate the sibling data to prevent DB storage
+            delete siblingData.fullPath
+          },
+        ],
+        afterRead: [
+          async ({ data }) => {
+            return data.breadcrumbs.slice(-1)[0]?.url || `/${data.slug || ''}`
+          },
+        ],
+      },
+    },
     {
       name: 'title',
       type: 'text',
@@ -74,7 +94,20 @@ export const Pages: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [CallToAction, Section, FormBlock, MediaBlock, Archive, Statistics, Testimonial, CalloutSection, HighlightCTA, CarouselSection, Tabsection, InnerPageNav],
+              blocks: [
+                CallToAction,
+                Section,
+                FormBlock,
+                MediaBlock,
+                Archive,
+                Statistics,
+                Testimonial,
+                CalloutSection,
+                HighlightCTA,
+                CarouselSection,
+                Tabsection,
+                InnerPageNav,
+              ],
               // validate: async (value) => {
               //   const carouselSectionBlocks = value.filter(block => block.blockType === 'CarouselSection');
               //   const isValid = carouselSectionBlocks.length > 1 ;
