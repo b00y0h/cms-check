@@ -5,7 +5,7 @@ import { backgroundColor } from '../../fields/backgroundColor'
 export const CarouselSection: Block = {
   slug: 'Schoolcarousel',
   fields: [
-  backgroundColor({}),
+  backgroundColor({ overrides: { name: 'carouselBackgroundColor' } }),
   {
     name: 'title',
     label: 'Title',

@@ -23,10 +23,10 @@ import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
 
 const generateTitle: GenerateTitle = () => {
-  return 'Appliy CMS'
-}
+	return "Appliy CMS";
+};
 
-const mockModulePath = path.resolve(__dirname, './emptyModuleMock.js')
+const mockModulePath = path.resolve(__dirname, "./emptyModuleMock.js");
 
 const storageAdapter = s3Adapter({
   config: {
@@ -40,88 +40,93 @@ const storageAdapter = s3Adapter({
 })
 
 export default buildConfig({
-  admin: {
-    livePreview: {
-      url: process.env.PAYLOAD_PUBLIC_SITE_URL,
-      breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-      ],
-    },
-    bundler: webpackBundler(),
-    meta: {
-      titleSuffix: '- Appily',
-      favicon: '/assets/favicon.svg',
-      ogImage: '/assets/logo.svg',
-    },
-    user: Users.slug,
-    components: {
-      // graphics: {
-      //   Logo,
-      //   Icon,
-      // },
-      // The BeforeDashboard component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import BeforeDashboard statement on line 15.
-      // beforeDashboard: [BeforeDashboard],
-      beforeLogin: [NoIndex],
-    },
-    webpack: config => ({
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve?.alias,
-          express: mockModulePath,
-        },
-      },
-    }),
-  },
-  editor: lexicalEditor({}),
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-  collections: [Users, Pages, Posts, Media, Partners, CarouselCards, LeadTypes],
-  globals: [Header, Footer],
-  typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts'),
-  },
-  graphQL: {
-    schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
-  },
-  db: mongooseAdapter({
-    url: process.env.MONGODB_URI,
-  }),
-  ...(process.env.PAYLOAD_PUBLIC_SITE_URL
-    ? {
-        cors: [process.env.PAYLOAD_PUBLIC_SITE_URL].filter(Boolean),
-        csrf: [process.env.PAYLOAD_PUBLIC_SITE_URL].filter(Boolean),
-      }
-    : {}),
-  plugins: [
-    cloudStorage({
-      collections: {
-        media: {
-          adapter: storageAdapter,
-        },
-      },
-    }),
-    FormBuilder({
-      fields: {
-        payment: false,
-      },
-    }),
-    nestedDocs({
-      collections: ['pages'],
-      generateLabel: (_, doc) => doc.title as string,
-      generateURL: docs => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
-    }),
-    seo({
-      collections: ['pages'],
-      generateTitle,
-      uploadsCollection: 'media',
-    }),
-    payloadCloud(),
-  ],
-})
+	admin: {
+		livePreview: {
+			url: process.env.PAYLOAD_PUBLIC_SITE_URL,
+			breakpoints: [
+				{
+					label: "Mobile",
+					name: "mobile",
+					width: 375,
+					height: 667,
+				},
+			],
+		},
+		bundler: webpackBundler(),
+		meta: {
+			titleSuffix: "- Appily",
+			favicon: "/assets/favicon.svg",
+			ogImage: "/assets/logo.svg",
+		},
+		user: Users.slug,
+		components: {
+			// graphics: {
+			//   Logo,
+			//   Icon,
+			// },
+			// The BeforeDashboard component renders the 'welcome' block that you see after logging into your admin panel.
+			// Feel free to delete this at any time. Simply remove the line below and the import BeforeDashboard statement on line 15.
+			// beforeDashboard: [BeforeDashboard],
+			beforeLogin: [NoIndex],
+		},
+		webpack: (config) => ({
+			...config,
+			resolve: {
+				...config.resolve,
+				alias: {
+					...config.resolve?.alias,
+					express: mockModulePath,
+				},
+			},
+		}),
+		css: path.resolve(__dirname, "admin/customStyles.scss"),
+	},
+	editor: lexicalEditor({}),
+	serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+	collections: [Users, Pages, Posts, Media, Partners, CarouselCards, LeadTypes],
+	globals: [Header, Footer],
+	typescript: {
+		outputFile: path.resolve(__dirname, "payload-types.ts"),
+	},
+	graphQL: {
+		schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
+	},
+	db: mongooseAdapter({
+		url: process.env.MONGODB_URI,
+	}),
+	...(process.env.PAYLOAD_PUBLIC_SITE_URL
+		? {
+				cors: [process.env.PAYLOAD_PUBLIC_SITE_URL].filter(Boolean),
+				csrf: [process.env.PAYLOAD_PUBLIC_SITE_URL].filter(Boolean),
+		  }
+		: {}),
+	plugins: [
+		cloudStorage({
+			collections: {
+			  media: {
+				adapter: storageAdapter,
+			  },
+			},
+		  }),
+		FormBuilder({
+			fields: {
+				payment: false,
+			},
+		}),
+		nestedDocs({
+			collections: ["pages"],
+			generateLabel: (_, doc) => doc.title as string,
+			generateURL: (docs) =>
+				docs.reduce((url, doc) => `${url}/${doc.slug}`, ""),
+		}),
+		// redirects({
+		//   collections: ['pages'],
+		// }),
+		seo({
+			collections: ["pages"],
+			generateTitle,
+			uploadsCollection: "media",
+		}),
+		payloadCloud(),
+	],
+});

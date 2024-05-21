@@ -3,7 +3,9 @@ import type { AfterChangeHook } from 'payload/dist/collections/config/types'
 // ensure that the home page is revalidated at '/' instead of '/home'
 export const formatAppURL = ({ doc }): string => {
   const pathToUse = doc.slug === 'home' ? '' : doc.slug
-  const { pathname } = new URL(`${process.env.PAYLOAD_PUBLIC_SITE_URL}/${pathToUse}`)
+  const { pathname } = new URL(`${process.env.PAYLOAD_PUBLIC_SITE_URL}/${pathToUse}`);
+  console.log(pathname,'pathname**')
+
   return pathname
 }
 
@@ -12,13 +14,17 @@ export const formatAppURL = ({ doc }): string => {
 export const revalidatePage: AfterChangeHook = ({ doc, req }) => {
   const revalidate = async (): Promise<void> => {
     let url
-
+    
+    console.log(req,'secr*')
     try {
-      url = formatAppURL({ doc })
+      url = formatAppURL({ doc });
+      // console.log(doc,'dovc**')
+      // console.log(url,'url*');
+      // console.log(process.env.PAYLOAD_PUBLIC_SERVER_URL,'process.env.PAYLOAD_PUBLIC_SERVER_URL')
       const res = await fetch(
         `${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/revalidate?secret=${process.env.REVALIDATION_KEY}&revalidatePath=${url}`,
       )
-
+      console.log(`${process.env.PAYLOAD_PUBLIC_SITE_URL}/api/revalidate?secret=${process.env.REVALIDATION_KEY}&revalidatePath=${url}`,'res**')
       if (res.ok) {
         req.payload.logger.info(`Revalidated path ${url}`)
       } else {
