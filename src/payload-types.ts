@@ -54,6 +54,7 @@ export interface Page {
   publishedDate?: string | null;
   hero: {
     type: 'none' | 'landingPage' | 'resultPage';
+    title?: string | null;
     richText?: {
       root: {
         type: string;
@@ -85,7 +86,6 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
-    title?: string | null;
     media?: string | Media | null;
     animation?: string | Media | null;
   };
@@ -155,7 +155,8 @@ export interface Page {
               columns?:
                 | {
                     size: string;
-                    alignment?: ('left' | 'center' | 'right') | null;
+                    halignment?: ('left' | 'center' | 'right') | null;
+                    valignment?: ('top' | 'center' | 'bottom') | null;
                     extendToBorders?: boolean | null;
                     blocks: (
                       | {
@@ -253,6 +254,7 @@ export interface Page {
                         }
                       | {
                           icon: string | Media;
+                          darkicon?: string | Media | null;
                           title?: string | null;
                           richText?: {
                             root: {
@@ -393,7 +395,8 @@ export interface Page {
         columns?:
           | {
               size: string;
-              alignment?: ('left' | 'center' | 'right') | null;
+              halignment?: ('left' | 'center' | 'right') | null;
+              valignment?: ('top' | 'center' | 'bottom') | null;
               extendToBorders?: boolean | null;
               blocks: (
                 | {
@@ -491,6 +494,7 @@ export interface Page {
                   }
                 | {
                     icon: string | Media;
+                    darkicon?: string | Media | null;
                     title?: string | null;
                     richText?: {
                       root: {
@@ -1037,6 +1041,8 @@ export interface Media {
   filesize?: number | null;
   width?: number | null;
   height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
   sizes?: {
     squareSmall?: {
       url?: string | null;
@@ -1230,6 +1236,7 @@ export interface Post {
   publishedDate?: string | null;
   hero: {
     type: 'none' | 'landingPage' | 'resultPage';
+    title?: string | null;
     richText?: {
       root: {
         type: string;
@@ -1261,7 +1268,6 @@ export interface Post {
           id?: string | null;
         }[]
       | null;
-    title?: string | null;
     media?: string | Media | null;
     animation?: string | Media | null;
   };
@@ -1331,7 +1337,8 @@ export interface Post {
               columns?:
                 | {
                     size: string;
-                    alignment?: ('left' | 'center' | 'right') | null;
+                    halignment?: ('left' | 'center' | 'right') | null;
+                    valignment?: ('top' | 'center' | 'bottom') | null;
                     extendToBorders?: boolean | null;
                     blocks: (
                       | {
@@ -1429,6 +1436,7 @@ export interface Post {
                         }
                       | {
                           icon: string | Media;
+                          darkicon?: string | Media | null;
                           title?: string | null;
                           richText?: {
                             root: {
@@ -1569,7 +1577,8 @@ export interface Post {
         columns?:
           | {
               size: string;
-              alignment?: ('left' | 'center' | 'right') | null;
+              halignment?: ('left' | 'center' | 'right') | null;
+              valignment?: ('top' | 'center' | 'bottom') | null;
               extendToBorders?: boolean | null;
               blocks: (
                 | {
@@ -1667,6 +1676,7 @@ export interface Post {
                   }
                 | {
                     icon: string | Media;
+                    darkicon?: string | Media | null;
                     title?: string | null;
                     richText?: {
                       root: {
