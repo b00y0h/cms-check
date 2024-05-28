@@ -1,7 +1,13 @@
 import type { Block } from "payload/types";
 import linkGroup from "../../fields/linkGroup";
 
+// Note Komal: everywhere were we are using this component with the name of comparison, we should change it to iconCard
 export const ComparisonBlock: Block = {
+	labels: {
+		singular: "Icon Card",
+		plural: "Icon Cards",
+	},
+	imageURL: "/media/block-thumbnails/icon-card.png",
 	slug: "comparison",
 	fields: [
 		{
