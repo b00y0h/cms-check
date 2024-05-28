@@ -31,9 +31,9 @@ const columnFields: Field[] = [
 				},
 			},
 			{
-				name: "alignment",
+				name: "halignment",
 				type: "select",
-				label: "Blocks Alignment",
+				label: "Blocks Horizontal Alignment",
 				defaultValue: "left",
 				options: [
 					{
@@ -47,6 +47,26 @@ const columnFields: Field[] = [
 					{
 						label: "Right",
 						value: "right",
+					},
+				],
+			},
+			{
+				name: "valignment",
+				type: "select",
+				label: "Blocks Vertical Alignment",
+				defaultValue: "top",
+				options: [
+					{
+						label: "Top",
+						value: "top",
+					},
+					{
+						label: "Center",
+						value: "center",
+					},
+					{
+						label: "Bottom",
+						value: "bottom",
 					},
 				],
 			},
@@ -136,7 +156,7 @@ export const Section: Block = {
 				{
 					name: "enableHighlight", // required
 					type: "checkbox", // required
-					label: "Highlight Section",
+					label: "Highlight Sections",
 					defaultValue: false,
 					admin: {
 						style: {
