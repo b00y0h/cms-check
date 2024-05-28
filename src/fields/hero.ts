@@ -41,16 +41,9 @@ export const hero: Field = {
 			label: "Hero content, includes the H1 title and a brief introduction. ",
 			type: "richText",
 		},
-		// richText({
-		//   admin: {
-		//     elements: ['h1', largeBody, label, 'link'],
-		//     leaves: ['bold', 'italic', 'underline'],
-		//   },
-		//   required: false
-		// }),
 		linkGroup({
 			overrides: {
-				maxRows: 2,
+				maxRows: 5,
 			},
 		}),
 		{
