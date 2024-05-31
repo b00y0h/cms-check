@@ -21,7 +21,7 @@ export const Media: CollectionConfig = {
 			}
 		],
     adminThumbnail: "squareSmall",
-		mimeTypes: ["image/*"],
+		// mimeTypes: ["image/*"],
   },
   access: {
     read: () => true,
