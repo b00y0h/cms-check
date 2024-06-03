@@ -5,7 +5,7 @@ import link from "../../fields/link";
 import { colorSchema } from "../../fields/colorSchema";
 import { SingleStatBlock } from "../../singleBlocks/StatisticsBlock";
 import { TestimonialBlock } from "../../singleBlocks/TestimonialBlock";
-import { CareerBlock } from "../../singleBlocks/CareerBlock";
+import { ImageCardBlock } from "../../singleBlocks/ImageCardBlock";
 import { ComparisonBlock } from "../../singleBlocks/ComparisonBlock";
 import { AccordionBlock } from "../../singleBlocks/AccordionBlock";
 import { RichTextBlock } from "../../singleBlocks/RichTextBlock";
@@ -95,7 +95,7 @@ const columnFields: Field[] = [
 		blocks: [
 			SingleStatBlock,
 			TestimonialBlock,
-			CareerBlock,
+			ImageCardBlock,
 			ComparisonBlock,
 			AccordionBlock,
 			RichTextBlock,

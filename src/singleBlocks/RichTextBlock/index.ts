@@ -4,7 +4,7 @@ import { BlocksFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import type { Block } from "payload/types";
 import { MediaBlock } from "../MediaBlock";
 import { AccordionBlock } from "../AccordionBlock";
-import { CareerBlock } from "../CareerBlock";
+import { ImageCardBlock } from "../ImageCardBlock";
 
 export const RichTextBlock: Block = {
 	slug: "richText",
@@ -18,7 +18,7 @@ export const RichTextBlock: Block = {
 			//   features: ({ defaultFeatures }) => [
 			//     ...defaultFeatures,
 			//     BlocksFeature({
-			//       blocks: [CareerBlock]
+			//       blocks: [ImageCardBlock]
 			//     }),
 			//   ]
 			// })

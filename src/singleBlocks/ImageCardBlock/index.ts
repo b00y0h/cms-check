@@ -5,14 +5,14 @@ import linkGroup from "../../fields/linkGroup";
 import { backgroundColor } from "../../fields/backgroundColor";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
-export const CareerBlock: Block = {
+export const ImageCardBlock: Block = {
 	labels: {
-		singular: "Career Card",
-		plural: "Career Cards",
+		singular: "Image Card",
+		plural: "Image Cards",
 	},
-	slug: "career",
+	slug: "imageCard",
 	fields: [
-		backgroundColor({ overrides: { name: "careerBlockBackgroundColor" } }),
+		backgroundColor({ overrides: { name: "imageCardBlockBackgroundColor" } }),
 		{
 			name: "title",
 			label: "Title",
